@@ -1,17 +1,22 @@
 import React from 'react';
-import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator,createSwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Octicons';
 import HomeScreen from './../screen/home'
 import SettingScreen from './../screen/setting'
 import FloorScreen from '../screen/floor';
 import SearchScreen from '../screen/search';
+import FloorSc from '../screen/home/Floor'
+import RoomScreen from '../screen/home/Room';
+import WelcomeScreen from '../screen/welcome';
+import LoginScreen from '../screen/login';
 
 const HomeTab = createStackNavigator({
   HomeStack: {screen:HomeScreen,
   navigationOptions:{
     header:null
   }},
-  FloorStack: FloorScreen,
+  Floor:FloorSc,
+  Room:RoomScreen,
   SearchStack: {screen:SearchScreen,
     navigationOptions:{
       header:null
@@ -57,4 +62,10 @@ const TabNavigator = createBottomTabNavigator({
     }
     );
   
-    export default createAppContainer(TabNavigator);
+    const AppStack=createSwitchNavigator({
+      Welcome:WelcomeScreen,
+      AppTab:TabNavigator,
+      Login:LoginScreen
+    })
+    
+    export default createAppContainer(AppStack);

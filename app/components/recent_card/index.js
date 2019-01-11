@@ -3,7 +3,7 @@ import { Text, View, StyleSheet,TouchableOpacity } from 'react-native'
 import style from '../../style'
 import {recentCard} from '../../dummy/reactCard'
 import Icon from 'react-native-vector-icons/Feather'
-
+import LinearGradient from 'react-native-linear-gradient'
 
 export default class RecentCard extends Component {
 
@@ -13,12 +13,14 @@ export default class RecentCard extends Component {
         const { floor, letter, building, color,status} = this.props.data
         const verify = status ?'#2CFF1A': '#ef7164'
         const icon = status ?'check-circle': 'x-circle'
+        const {onClick}=this.props;
+        
         return (
-            <TouchableOpacity >
+            <TouchableOpacity onPress={onClick}>
                 <View style={styles.card}>
                 <View style={styles.circle} backgroundColor={color} >
                     <Text style={styles.campus}>{letter}</Text>
-                </View>
+                    </View>
                 <View style={styles.text1}>
                 <View style={{flex:1}}>
                     <Text style={styles.building}>{building}</Text>
@@ -36,7 +38,6 @@ export default class RecentCard extends Component {
 const styles = StyleSheet.create({
     card: {
         margin: 5,
-        
         width: 165,
         height: 165,
         backgroundColor: '#fff',

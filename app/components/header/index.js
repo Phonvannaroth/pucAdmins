@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Feather';
 // create a component
 class Header extends Component {
     render() {
-        const { img, name, campus, onClick } = this.props
+        const { img, name, campus, onClick,logOut } = this.props
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -18,7 +18,7 @@ class Header extends Component {
                             <Text style={styles.campus}>{campus}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity  onPress={onClick}>
+                    <TouchableOpacity  onPress={logOut}>
                         <Ionicons name="search" size={32} color="#2b2b2b" />
                     </TouchableOpacity>
                 </View>
