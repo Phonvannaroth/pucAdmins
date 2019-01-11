@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { Text, View,StyleSheet,TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
+import LinearGradient from 'react-native-linear-gradient'
+
 export default class ListBuilding extends Component {
   render() {
-      const{building}=this.props.data
+      const{name}=this.props
     return (
         <TouchableOpacity>
       <View style={styles.list}>
-      <Icon style={styles.icon} name="bookmark"></Icon>
+      <View style={styles.profile}>
+      </View>
       <View style={styles.item}>   
-        <Text style={styles.text}>{building}</Text>
+        <Text style={styles.text}>{name}</Text>
         <Icon style={styles.icon} name="chevron-right"></Icon>
         </View>
       </View>
@@ -36,11 +39,15 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottomColor: '#2b2b2b',
-        borderBottomWidth: 0.2,
         paddingLeft:16,
     },
     text:{
         fontSize:16,
+    },
+    profile:{
+        width:45,
+        height: 45,
+        backgroundColor: '#333',
+        borderRadius: 22.5,
     }
 })

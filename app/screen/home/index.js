@@ -11,20 +11,34 @@ import { recentCard } from '../../dummy/reactCard'
 import { listBuilding } from '../../dummy/listBuilding'
 import ListBuilding from '../../components/list'
 
-const numColumns = 2;
-// create a component
-class HomeScreen extends Component {
 
+import { inject, observer } from 'mobx-react';
 
-    constructor(props) {
-        super(props)
-    };
+@inject("auth")
+@observer
+export default class HomeScreen extends Component {
+
+    componentDidMount(){
+        this.props.auth.fetchBuilding();
+    }
+
+    _onLogOut=()=>{
+        this.props.auth.logOut();
+    }
+
+    _onBuilding=()=>{
+        this.props.navigation.navigate("Floor")
+    }
+
     render() {
+        const numColumns=2;
+        const {displayName,campus}=this.props.auth.account;
+        const {building}=this.props.auth;
         return (
 
             <SafeAreaView style={[style.container, style.background]}>
             <View style={{height:80}}>
-                 <Header name="Administrator" campus="South Campus" onClick={() => this.props.navigation.navigate('SearchStack')}/>
+                 <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/>
                  </View>
                 <ScrollView showsVerticalScrollIndicator={false}  >
                    
@@ -39,7 +53,7 @@ class HomeScreen extends Component {
 
                             <FlatList
                                 data={recentCard}
-                                renderItem={({ item }) => <RecentCard data={item} />}
+                                renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
                                 numColumns={numColumns}
                             />
                         </View>
@@ -52,9 +66,10 @@ class HomeScreen extends Component {
 
 
                         </View>
+                        
                         {
-                            listBuilding.map(m => {
-                                return (<ListBuilding data={m} />)
+                            building.map(m => {
+                                return (<ListBuilding key={m.key} name={m.name} />)
                             })
                         }
 
@@ -66,6 +81,3 @@ class HomeScreen extends Component {
         );
     }
 }
-
-//make this component available to the app
-export default HomeScreen;
