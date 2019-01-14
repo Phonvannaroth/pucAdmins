@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
         paddingLeft:12,
         paddingRight: 12,
         alignItems:'center',
+        
     },
     icon:{
-        fontSize:32,
-        color: '#2b2b2b',
+        fontSize:18,
+        fontWeight: 'bold',
+        color: '#3333',
     },
     item:{
         flex: 2,
@@ -39,7 +41,9 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingLeft:16,
+        paddingLeft:22,
+        borderBottomColor: "#333",
+        
     },
     text:{
         fontSize:16,

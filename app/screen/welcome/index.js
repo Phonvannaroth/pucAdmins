@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View,Image } from 'react-native'
 import { inject, observer } from 'mobx-react';
 
 @inject("auth")
@@ -19,7 +19,7 @@ componentDidMount(){
   render() {
     return (
       <View>
-        <Text>Welcome</Text>
+        <Image/>
       </View>
     )
   }

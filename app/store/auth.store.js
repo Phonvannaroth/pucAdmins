@@ -36,11 +36,11 @@ export default class Auth{
     logIn(email,password,callback){
         this.process=true;
         signIn(email,password).then(res=>{
-            this.process=false;
             callback(true,res)
-        }).catch(error=>{
             this.process=false;
+        }).catch(error=>{
             callback(false,error)
+            this.process=false;
         })
     }
 
@@ -58,8 +58,10 @@ export default class Auth{
     logOut(callback){
         this.process=true;
         signOut().then(()=>{
+            this.process=false;
             callback(true,null)
         }).catch(error=>{
+            this.process=false;
             callback(false,error)
         })
     }
