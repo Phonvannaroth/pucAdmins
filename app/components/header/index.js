@@ -9,27 +9,23 @@ class Header extends Component {
         const { img, name, campus, onClick,search, drawer } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                <TouchableOpacity  onPress={drawer}>
-                    <Ionicons name="align-left" size={32} color="#2b2b2b" />
-                    </TouchableOpacity>
-                    <View style={styles.middleHeader}>
-                        <View style={styles.center}>
-                           
-                            <Text style={styles.user}>{name}</Text>
-                            <Text style={styles.campus}>{campus}</Text>
-                        </View>
+            <View style={styles.header}>
+            <TouchableOpacity  onPress={drawer}>
+                <Ionicons name="align-left" size={32} color="#2b2b2b" />
+                </TouchableOpacity>
+                <View style={styles.middleHeader}>
+                    <View style={styles.center}>
+                       
+                        <Text style={styles.user}>{name}</Text>
+                        <Text style={styles.campus}>{campus}</Text>
                     </View>
-                    <TouchableOpacity  onPress={search}>
-                        <Ionicons name="search" size={32} color="#2b2b2b" />
-                    <TouchableOpacity  onPress={onClick}>
-                        <Ionicons name="search" size={32} color="#2b2b2b" style={{paddingRight:18,}} />
-                    </TouchableOpacity>
-                    <TouchableOpacity  onPress={logOut}>
-                        <Ionicons name="log-out" size={32} color="#2b2b2b" />
-                    </TouchableOpacity>
                 </View>
+                <TouchableOpacity  onPress={search}>
+                    <Ionicons name="search" size={32} color="#2b2b2b" />
+                </TouchableOpacity>
             </View>
+        </View>
+        
             
         );
     }
