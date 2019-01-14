@@ -4,7 +4,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { inject, observer } from 'mobx-react';
 import { Icon } from 'react-native-elements';
 
-
 @inject("auth")
 @observer
 export default class LoginScreen extends Component {
@@ -56,7 +55,14 @@ export default class LoginScreen extends Component {
         />
         </View>
         <TouchableOpacity onPress={this._onLogin}>
-            <Text> {process?"Log in...":"Log in"}</Text>
+        <LinearGradient colors={['#0082c8', '#0082c8', '#667db6',]} style={{ alignItems: 'center', marginTop: 22, borderRadius: 12, overflow: "hidden", height: 50, justifyContent: 'center', width:200, }}>  
+            <Text style={styles.text} > {process?"process":"Log in"}</Text>
+            </LinearGradient>
+        {
+        process? 
+        <ActivityIndicator size="large" color="#0000ff" />
+        :<View/>
+        }
         </TouchableOpacity>
         <View style={{marginTop:200, flex:2}}>
         <View style={{alignItems:"center", justifyContent:"center",flexDirection:'row'}}>
