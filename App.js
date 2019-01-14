@@ -4,6 +4,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import Route from './app/route'
 import {Provider} from 'mobx-react'
 import store from './app/store'
+import TestScreen from './app/screen/test'
 
 
 export default class App extends Component{
@@ -12,6 +13,7 @@ export default class App extends Component{
     <Provider {...store}>
       <Route/>
     </Provider>
+    // <TestScreen/>
     );
   }
 }

@@ -12,11 +12,11 @@ class SearchScreen extends Component {
 
 <SafeAreaView>
 <SearchBar
-containerStyle={{backgroundColor: 'transparent'}}
+containerStyle={{backgroundColor: 'none'}}
   showLoading
   platform="ios"
   cancelButtonTitle="Cancel"
-  placeholder='Search' />
+  placeholder='Searching for lecturer' />
 
 </SafeAreaView>
 
