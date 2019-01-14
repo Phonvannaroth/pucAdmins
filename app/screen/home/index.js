@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
 
@@ -37,52 +36,53 @@ export default class HomeScreen extends Component {
         const numColumns = 2;
         const { displayName, campus } = this.props.auth.account;
         const { building } = this.props.auth;
-        return (
-
-            <SafeAreaView style={[style.container, style.background]}>
-                <View style={style.homeheader}>
-                    <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
-                </View>
-                {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
-
-                <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
-
-                    <View style={style.main} >
-
-                        {/* <Header name="Steve.Job" campus="South Campus" /> */}
-
-                        <View style={{ marginBottom: 15, marginTop: 10 }}>
-                            <Text style={style.h}>Recent Building</Text>
-                        </View>
-                        <View style={{ flex: 1, }} >
-
-                            <FlatList
-                                data={recentCard}
-                                renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
-                                numColumns={numColumns}
-                            />
-                        </View>
-
-
-                        <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-                            <View style={{ flex: 1, marginBottom: 10 }} >
-
-                            </View>
-
-
-                        </View>
-
-                        {
-                            building.map(m => {
-                                return (<ListBuilding key={m.key} name={m.name} />)
-                            })
-                        }
-
-
+        if(displayName){
+            return (
+                <SafeAreaView style={[style.container, style.background]}>
+                    <View style={style.homeheader}>
+                        <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
                     </View>
-                </ScrollView>
-            </SafeAreaView>
-
-        );
+                    {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
+    
+                    <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
+    
+                        <View style={style.main} >
+    
+                            {/* <Header name="Steve.Job" campus="South Campus" /> */}
+    
+                            <View style={{ marginBottom: 15, marginTop: 10 }}>
+                                <Text style={style.h}>Recent Building</Text>
+                            </View>
+                            <View style={{ flex: 1, }} >
+    
+                                <FlatList
+                                    data={recentCard}
+                                    renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
+                                    numColumns={numColumns}
+                                />
+                            </View>
+    
+    
+                            <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+                                <View style={{ flex: 1, marginBottom: 10 }} >
+    
+                                </View>
+    
+    
+                            </View>
+    
+                            {
+                                building.map(m => {
+                                    return (<ListBuilding key={m.key} name={m.name} />)
+                                })
+                            }
+    
+    
+                        </View>
+                    </ScrollView>
+                </SafeAreaView>
+    
+            );
+        }
     }
 }

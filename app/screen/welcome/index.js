@@ -19,7 +19,7 @@ componentDidMount(){
   render() {
     return (
       <View>
-        <Image/>
+        
       </View>
     )
   }

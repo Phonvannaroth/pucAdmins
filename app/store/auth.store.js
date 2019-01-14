@@ -5,7 +5,7 @@ export default class Auth{
     @observable user= null;
     @observable loading=false;
     @observable account=null;
-    @observable process=false;
+    @observable process =false;
     @observable building=[];
 
     constructor(){
