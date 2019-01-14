@@ -18,8 +18,11 @@ class Header extends Component {
                             <Text style={styles.campus}>{campus}</Text>
                         </View>
                     </View>
+                    <TouchableOpacity  onPress={onClick}>
+                        <Ionicons name="search" size={32} color="#2b2b2b" style={{paddingRight:18,}} />
+                    </TouchableOpacity>
                     <TouchableOpacity  onPress={logOut}>
-                        <Ionicons name="search" size={32} color="#2b2b2b" />
+                        <Ionicons name="log-out" size={32} color="#2b2b2b" />
                     </TouchableOpacity>
                 </View>
             </View>
