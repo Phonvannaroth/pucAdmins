@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Feather';
 import style from '../../style'
-import ListFloor from '../../components/listFloor'
+import ListFloor from '../../components/lecturer'
 import {listBuilding} from '../../dummy/listBuilding'
 
 // create a component
@@ -21,11 +21,7 @@ class SettingScreen extends Component {
             </View>
                 <ScrollView>
                
-                {
-                            listBuilding.map(m => {
-                                return (<ListFloor data={m} />)
-                            })
-                        }
+               
                 </ScrollView>
                 </View>
             </SafeAreaView>

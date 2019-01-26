@@ -45,12 +45,37 @@ export default StyleSheet.create({
     container: {
         flex: 1,
     },
+    homeheader:{
+        height: 60 , 
+        borderBottomWidth:0.5, 
+        borderBottomColor:'#d5d5d5'
+    },
     main: {
         marginHorizontal: 10,
 
 
     },
+    mainbg: {
+        backgroundColor: COLORS.mainbg
+    },
     header: {
         marginTop: 50
+    },
+    /////
+    containered: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    heading: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    menuItem:{
+        padding: 10,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da'
     }
 })

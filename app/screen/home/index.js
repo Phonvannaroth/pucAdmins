@@ -17,36 +17,41 @@ import { inject, observer } from 'mobx-react';
 @inject("auth")
 @observer
 export default class HomeScreen extends Component {
-
-    componentDidMount(){
+    
+    componentDidMount() {
         this.props.auth.fetchBuilding();
     }
 
-    _onLogOut=()=>{
+    _onLogOut = () => {
         this.props.auth.logOut();
     }
 
-    _onBuilding=()=>{
+    _onBuilding = () => {
         this.props.navigation.navigate("Floor")
+    }
+    _onSearch= () => {
+        this.props.navigation.navigate("SearchStack")
     }
 
     render() {
-        const numColumns=2;
-        const {displayName,campus}=this.props.auth.account;
-        const {building}=this.props.auth;
+        const numColumns = 2;
+        const { displayName, campus } = this.props.auth.account;
+        const { building } = this.props.auth;
         return (
 
             <SafeAreaView style={[style.container, style.background]}>
-            <View style={{height:80}}>
-                 <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/>
-                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}  >
-                   
+                <View style={style.homeheader}>
+                    <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
+                </View>
+                {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
+
+                <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
+
                     <View style={style.main} >
 
                         {/* <Header name="Steve.Job" campus="South Campus" /> */}
 
-                        <View style={{ marginBottom: 15 }}>
+                        <View style={{ marginBottom: 15, marginTop: 10 }}>
                             <Text style={style.h}>Recent Building</Text>
                         </View>
                         <View style={{ flex: 1, }} >
@@ -66,10 +71,10 @@ export default class HomeScreen extends Component {
 
 
                         </View>
-                        
+
                         {
                             building.map(m => {
-                                return (<ListBuilding key={m.key} name={m.name} />)
+                                return (<ListBuilding onClick={this._onBuilding} key={m.key} name={m.name} />)
                             })
                         }
 

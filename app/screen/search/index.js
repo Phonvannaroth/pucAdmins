@@ -1,24 +1,84 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { floorData } from '../../dummy/floorData'
+import LectureCard from '../../components/lecturer_card'
+import ListDrawer from '../../components/listDrawer'
+import ListLecture from '../../components/lecturer'
+import ListSearch from '../../components/listsearch'
+import { listLecture } from '../../dummy/listBuilding'
 
-   
+import { inject, observer } from 'mobx-react';
 
 // create a component
+@inject("auth")
+@observer
+
+
 class SearchScreen extends Component {
+
+    constructor() {
+        super()
+    }
+
+    _onBack = () => { this.props.navigation.goBack(); }
     render() {
+
         return (
 
-<SafeAreaView>
-<SearchBar
-containerStyle={{backgroundColor: 'transparent'}}
-  showLoading
-  platform="ios"
-  cancelButtonTitle="Cancel"
-  placeholder='Search' />
+            <SafeAreaView>
+                <SearchBar
+                    round
+                    searchIcon={
+                        <TouchableOpacity onPress={this._onBack}>
+                            <Icon name="ios-arrow-back"
+                                style={styles.searchicon}/>
+                        </TouchableOpacity>
+                    }
+                    containerStyle={styles.search}
+                    inputContainerStyle={styles.searchbox}
+                    placeholder='Search'
+                    autoFocus={true}
+                />
+                <View style={styles.body}>
 
-</SafeAreaView>
+                    <Text>Recent</Text>
+                    <ScrollView horizontal="true" showsHorizontalScrollIndicator="false">
+                        <View style={styles.recent}>
+
+
+                            {
+                                listLecture.map(m => {
+                                    return (<ListLecture data={m} />)
+                                })
+                            }
+
+
+
+                        </View>
+
+                    </ScrollView>
+                    <ScrollView  showsHorizontalScrollIndicator="false">
+                        <View >
+
+
+                            {
+                                listLecture.map(m => {
+                                    return (<ListSearch data={m} />)
+                                })
+                            }
+
+
+
+                        </View>
+
+                    </ScrollView>
+
+                </View>
+
+            </SafeAreaView>
 
 
         );
@@ -29,10 +89,30 @@ containerStyle={{backgroundColor: 'transparent'}}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-       
+
     },
+    search: {
+        backgroundColor: '#fff',
+        borderWidth: 0,
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+        paddingTop: 12,
+    },
+    searchbox: {
+        backgroundColor: '#f1f0f0',
+        height: 40,
+        borderRadius: 20,
+        padding: 15
+    },
+    searchicon: {
+        fontSize: 24,
+    },
+    body: {
+        margin: 10
+    },
+    recent: {
+        flexDirection: 'row',
+    }
 });
 
 //make this component available to the app
