@@ -1,4 +1,4 @@
-export const floorData=[
+export const roomData=[
     {
         img:"https://lh5.googleusercontent.com/p/AF1QipMJNJFyKoQ8PEDM9U4iJ87dEcDB-bEJIo1TWyB-=w408-h306-k-no",
         name:'Banteay Meanchey',

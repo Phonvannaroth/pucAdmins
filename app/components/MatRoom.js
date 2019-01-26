@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View,Image, ImageBackground,TouchableOpacity } from 'react-native'
+import { Text,Image, StyleSheet, View, ImageBackground,TouchableOpacity } from 'react-native'
 
 export default class floor extends Component {
   render() {
@@ -10,8 +10,7 @@ export default class floor extends Component {
       <View style={styles.flex}>
       <View style={styles.profile}>  
       <View style={styles.profile}>
-      <Image source={{uri:img}}
-        style={styles.img}/>
+      <Image source={require('../img/room.png')} style={{width:45,height:45}}></Image>
         
         <View style={styles.h1}>
           <Text style={styles.p1}>{name}</Text>

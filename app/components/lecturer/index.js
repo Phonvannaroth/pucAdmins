@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import Icon from 'react-native-vector-icons/Feather'
 
 
-export default class ListFloor extends Component {
+export default class ListLecture extends Component {
     render() {
         const { name, img, building, color, status } = this.props.data
         const {onClick} = this.props
@@ -16,20 +16,19 @@ export default class ListFloor extends Component {
                         <View style={styles.active} backgroundColor={status}>
                             <View style={styles.circle} backgroundColor="#CC61C8">
                                 <View style={{
-                                    width: 60,
-                                    height: 60,
+                                    width: 55,
+                                    height: 55,
                                     // backgroundColor: '#FADDDD',
-                                    borderRadius: 30,
+                                    borderRadius: 27.5,
                                     backgroundColor: '#fff',
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }} >
-                                    {/* <ImageBackground source={{uri:img}} style={{ */}
-                                    <ImageBackground source={require('../../img/stair.png')} style={{   
-                                        width: 30,
-                                        height: 30,
+                                    <ImageBackground source={{uri:img}} style={{
+                                        width: 50,
+                                        height: 50,
                                         // backgroundColor: '#FADDDD',
-                                        borderRadius: 15,
+                                        borderRadius: 25,
                                         backgroundColor: '#fff',
                                         overflow: 'hidden',
                                        
@@ -59,7 +58,7 @@ export default class ListFloor extends Component {
 const styles = StyleSheet.create({
     card: {
 
-        height: 85,
+        height: 80,
         width: 70,
   
         paddingBottom:  15,
@@ -68,7 +67,6 @@ const styles = StyleSheet.create({
      
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 4,
     },
     active: {
         width: 65,
@@ -79,10 +77,10 @@ const styles = StyleSheet.create({
        
     },
     circle: {
-        width: 65,
-        height: 65,
+        width: 60,
+        height: 60,
         // backgroundColor: '#FADDDD',
-        borderRadius: 32.5,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 5,

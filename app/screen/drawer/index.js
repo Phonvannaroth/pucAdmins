@@ -34,9 +34,9 @@ export default class DrawerScreen extends Component {
             <View style={styles.container}>
 
                 <View style={styles.header}>
-                    <ImageBackground source={require('../../img/dbg.png')} style={styles.imgbg}>
+                    {/* <ImageBackground source={require('../../img/dbg.png')} style={styles.imgbg}> */}
                         <SafeAreaView style={{ margin: 12 }}>
-                            <Image source={require('../../img/justen.jpg')} style={styles.imgs} />
+                            <Image source={require('../../img/p3.jpg')} style={styles.imgs} />
 
                             <View style={{ flexDirection: 'column', marginHorizontal: 10 }}>
                                 <Text style={styles.htext}>{displayName}</Text>
@@ -44,25 +44,25 @@ export default class DrawerScreen extends Component {
                             </View>
 
                         </SafeAreaView>
-                    </ImageBackground>
+                    {/* </ImageBackground> */}
 
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                    <View style={styles.bodersty}>
                    <Text style={styles.dtext}>General Labels</Text>
-                    <ListDrawer name="Contact" icon="users"></ListDrawer>
-                    <ListDrawer name="Filter" icon="filter"></ListDrawer>
+                    <ListDrawer name="Contact" icon="ios-person" colors="gray"></ListDrawer>
+                    <ListDrawer name="Filter" icon="ios-leaf" colors="gray"></ListDrawer>
                     </View>
                     <View style={styles.bodersty}>
                     <Text style={styles.dtext}>Management</Text>
-                    <ListDrawer name="Overview" icon="airplay" colors="orange"></ListDrawer>
-                    <ListDrawer name="Schedules" icon="clipboard" colors="green"></ListDrawer>
-                    <ListDrawer name="Booking" icon="book" colors="#6a1b9a"></ListDrawer>
-                    <ListDrawer name="Reports" icon="minus-circle" colors="red" bgcolor="red"></ListDrawer>
+                    <ListDrawer name="Overview" icon="ios-clipboard" colors="gray"></ListDrawer>
+                    <ListDrawer name="Schedules" icon="ios-calendar" colors="gray"></ListDrawer>
+                    <ListDrawer name="Booking" icon="ios-bookmarks" colors="gray"></ListDrawer>
+                    <ListDrawer name="Reports" icon="ios-remove-circle" colors="gray" bgcolor="red"></ListDrawer>
                     </View>
                     <Text style={styles.dtext}>Account</Text>
-                    <ListDrawer name="Settings" icon="settings" colors="gray" bgcolor="red"></ListDrawer>
-                    <ListDrawer name="Log Out" icon="log-out" colors="gray" route={this._onLogOut}></ListDrawer>
+                    <ListDrawer name="Settings" icon="ios-options" colors="gray" bgcolor="red"></ListDrawer>
+                    <ListDrawer name="Log Out" icon="ios-log-out" colors="gray" route={this._onLogOut}></ListDrawer>
                     
                     
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 175,
-        backgroundColor: '#EDEFEE',
+        backgroundColor: '#CC61C8',
 
     },
     imgs: {

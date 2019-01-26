@@ -74,7 +74,7 @@ export default class HomeScreen extends Component {
 
                         {
                             building.map(m => {
-                                return (<ListBuilding key={m.key} name={m.name} />)
+                                return (<ListBuilding onClick={this._onBuilding} key={m.key} name={m.name} />)
                             })
                         }
 
