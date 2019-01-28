@@ -20,6 +20,7 @@ export default StyleSheet.create({
     h: {
         fontWeight: FONTS.h,
         color: '#2b2b2b',
+        marginLeft:5,
         fontSize: 18,
         fontWeight: '800',
         fontFamily: 'Helvetica Neue'

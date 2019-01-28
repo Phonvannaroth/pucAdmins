@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text,Image, View,StyleSheet,TouchableOpacity } from 'react-native'
+import { Text,Image,ImageBackground, View,StyleSheet,TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -10,12 +10,12 @@ export default class ListBuilding extends Component {
     return (
         <TouchableOpacity onPress={onClick}>
       <View style={styles.list}>
-      <View style={styles.c1}>
-      <View style={styles.c2}>
+      {/* <View style={styles.c1}>
+      <View style={styles.c2}> */}
       {/* <Icon style={{color:'#fff'}} name="ios-business" size={24}></Icon> */}
-      <Image source={require('../../img/b.png')} style={{width:45,height:45}}></Image>
-      </View>
-      </View>
+      <ImageBackground source={require('../../img/b.png')} style={{width:50,height:50, overflow:'hidden'}}></ImageBackground>
+      {/* </View>
+      </View> */}
       <View style={styles.item}>   
         <Text style={styles.text}>{name}</Text>
         <Icon style={styles.icon} name="ios-arrow-forward"></Icon>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     icon:{
         fontSize:18,
         fontWeight: 'bold',
-        color: '#3333',
+        color: '#CC61C8',
     },
     item:{
         flex: 2,
