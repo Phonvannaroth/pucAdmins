@@ -8,28 +8,29 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ListFolder from '../../components/listFolder'
 import Modal from "react-native-modal";
 
+import Verify from '../../elements/verify'
 import TR from '../../elements/tr'
 import TH from '../../elements/th'
 
 // create a component
 export default class ProfileScreen extends Component {
-
+  
     state = {
         isModalVisible: false,
-        presented: false,
-        late: false,
-        tooLate: false,
-        absent: false,
+        confirm: false,
+        
     };
+
 
     _toggleModal = () =>
         this.setState({ isModalVisible: !this.state.isModalVisible });
-
+    
     render() {
+       
 
         return (
             <View style={{ flex: 1 }}>
-                <SafeAreaView style={{ height: 180, backgroundColor: '#F27676' }}>
+                <SafeAreaView style={{ height: 180, backgroundColor: '#CC61C8' }}>
                     <View style={{ marginHorizontal: 15, }}>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ flexDirection: 'row', alignItems: 'center', padding: 5 }}>
                             <Icon size={32} name='ios-arrow-back' color='#fff' ></Icon>
@@ -43,53 +44,41 @@ export default class ProfileScreen extends Component {
 
                     <View style={{ flex: 1 }}>
 
-                        <TouchableOpacity onPress={this._toggleModal}>
-                            <Text>Show Modal</Text>
-                        </TouchableOpacity>
-
                         <Modal isVisible={this.state.isModalVisible} style={styles.bottomModal}>
-                            <KeyboardAvoidingView behavior="position" enabled>
-                                <View style={{ alignItems: 'center' }}>
-                                    <View style={{ height: 420, width: 375, backgroundColor: '#fff', borderTopRightRadius: 20, borderTopLeftRadius: 20 }}>
 
-                                        <TouchableOpacity onPress={this._toggleModal} style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5, margin: 15 }}>
-                                            <Icon size={32} name='ios-close' color='#333' style={{ flex: 1 }}></Icon>
-                                            <TouchableOpacity onPress={this._toggleModal} >
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={{ height: 420, width: 375, backgroundColor: '#fff', borderTopRightRadius: 20, borderTopLeftRadius: 20 }}>
 
-                                                <Icon size={32} name='ios-paper-plane' color='#333' style={{ flex: 1 }}></Icon>
-
-                                            </TouchableOpacity>
-
-                                        </TouchableOpacity>
-
-                                        <CheckBox 
-                                        checkedIcon='dot-circle-o'
-                                        uncheckedIcon='circle-o'
-                                        title="Presented" checked={this.state.presented} onPress={() => this.setState({ presented: !this.state.presented })}
-                                        />
-                                        <CheckBox 
-                                         checkedIcon='dot-circle-o'
-                                         uncheckedIcon='circle-o'
-                                        title="Late" checked={this.state.late} onPress={() => this.setState({ late: !this.state.late })}
-                                        />
-                                        <CheckBox 
-                                         checkedIcon='dot-circle-o'
-                                         uncheckedIcon='circle-o'
-                                        title="Too Late" checked={this.state.tooLate} onPress={() => this.setState({ tooLate: !this.state.tooLate })}
-                                        />
-                                        <CheckBox
-                                         checkedIcon='dot-circle-o'
-                                         uncheckedIcon='circle-o'
-                                        title="Absent" checked={this.state.absent} onPress={() => this.setState({ absent: !this.state.absent })}
-                                        />
-
-                                        <TextInput style={{ height: 80, borderWidth: 0.5, borderRadius: 5, padding: 10, margin: 5, marginBottom: 5 }} multiline={true} numberOfLines={3} placeholder='Comment'></TextInput>
-
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5, margin: 15 }}>
+                                        <View style={{ flex: 1 }}>
+                                            <Text style={{ fontWeight: '800', fontSize: 24, flex: 1 }}>Verification</Text>
+                                        </View>
+                                        <View  >
+                                            <TouchableOpacity onPress={this._toggleModal}>
+                                                <Icon size={32} name='ios-close' color='#333' />
+                                            </TouchableOpacity >
+                                        </View>
 
                                     </View>
 
+                                    <Verify Ionicons='ios-ribbon' Txt='Presented' Color='gray' />
+                                    <Verify Ionicons='ios-time' Txt='Late' Color='#2b2b2b' />
+                                    <Verify Ionicons='ios-speedometer' Txt='Too Late' Color='purple' />
+                                    <Verify Ionicons='ios-hand' Txt='Permission' Color='orange' />
+                                    <Verify Ionicons='ios-sad' Txt='Absent' Color='red' />
+
+                                    <TouchableOpacity  onPress={this._toggleModal} >
+                                        <View style={styles.btnSubmit} backgroundColor='#CC61C8' >
+                                            <View style={{ margin: 15 }}>
+                                                <Text style={{ fontSize: 14, fontWeight: '600', color: '#fff' }}>Cancle</Text>
+
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
-                            </KeyboardAvoidingView>
+
+                            </View>
+
                         </Modal>
 
                     </View>
@@ -98,7 +87,7 @@ export default class ProfileScreen extends Component {
 
                         <ListFolder />
                         <TouchableOpacity onPress={this._toggleModal} >
-                            <View style={styles.button} backgroundColor='#F27676' >
+                            <View style={styles.button} backgroundColor='#CC61C8' >
                                 <View style={{ margin: 15 }}>
                                     <Text style={{ fontSize: 14, fontWeight: '600', color: '#fff' }}>Verification</Text>
 
@@ -126,4 +115,12 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         margin: 0
     },
+    btnSubmit: {
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 15,
+        borderRadius: 10,
+
+    }
 });

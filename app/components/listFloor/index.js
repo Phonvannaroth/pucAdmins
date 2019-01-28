@@ -3,12 +3,10 @@ import { Text, View, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import Icon from 'react-native-vector-icons/Feather'
 
 
-export default class ListFloor extends Component {
-    render() {
-        const { name, img, building, color, status } = this.props.data
-        const {onClick} = this.props
+export default ListFloor=({name,onClick,status})=> {
         const verify = status ? '#2CFF1A' : '#ef7164'
-        const icon = status ? 'check-circle' : 'x-circle'
+        const icon = status ? 'check-circle' : 'x-circle';
+        console.log(name)
         return (
             <TouchableOpacity onPress={onClick}>
                 <View style={styles.card}>
@@ -40,7 +38,7 @@ export default class ListFloor extends Component {
                                 </View>
 
                             </View>
-                            <Text style={styles.floor}>{name} Floor</Text>
+                            <Text style={styles.floor}>{name}</Text>
                            
                         </View>
 
@@ -55,7 +53,6 @@ export default class ListFloor extends Component {
             </TouchableOpacity>
         )
     }
-}
 const styles = StyleSheet.create({
     card: {
 

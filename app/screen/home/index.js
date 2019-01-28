@@ -14,7 +14,7 @@ import ListBuilding from '../../components/list'
 
 import { inject, observer } from 'mobx-react';
 
-@inject("auth")
+@inject("auth","building")
 @observer
 export default class HomeScreen extends Component {
     
@@ -26,7 +26,8 @@ export default class HomeScreen extends Component {
         this.props.auth.logOut();
     }
 
-    _onBuilding = () => {
+    _onBuilding(item) {
+        this.props.building.fetchSelectedBuilding(item)
         this.props.navigation.navigate("Floor")
     }
     _onSearch= () => {
@@ -52,7 +53,8 @@ export default class HomeScreen extends Component {
                         {/* <Header name="Steve.Job" campus="South Campus" /> */}
 
                         <View style={{ marginBottom: 15, marginTop: 10 }}>
-                            <Text style={style.h}>Recent Building</Text>
+                            {/* <Text style={style.h}>Recent Building</Text> */}
+                            <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>Recent Building</Text>
                         </View>
                         <View style={{ flex: 1, }} >
 
@@ -63,20 +65,24 @@ export default class HomeScreen extends Component {
                             />
                         </View>
 
-
+                        
                         <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-                            <View style={{ flex: 1, marginBottom: 10 }} >
-
+                            <View style={{ flex: 1, marginTop: 10 }} >
+                            {/* <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>List Building</Text> */}
                             </View>
 
 
                         </View>
-
+{/* 
                         {
                             building.map(m => {
-                                return (<ListBuilding onClick={this._onBuilding} key={m.key} name={m.name} />)
+                                return (<ListBuilding onClick={this._onBuilding(item)} key={m.key} name={m.name} />)
                             })
-                        }
+                        } */}
+                        <FlatList
+                         data={building}
+                         renderItem={({ item }) => ( <ListBuilding onClick={()=>this._onBuilding(item)} name={item.name} />)}
+                        />
 
 
                     </View>
