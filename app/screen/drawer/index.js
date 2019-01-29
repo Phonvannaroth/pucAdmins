@@ -28,13 +28,16 @@ export default class DrawerScreen extends Component {
     _onBuilding = () => {
         this.props.navigation.navigate("Floor")
     }
+    _onSetting =()=>{
+        this.props.navigation.navigate("Setting")
+    }
     render() {
         const { displayName, campus, email } = this.props.auth.account;
         return (
             <View style={styles.container}>
 
                 <View style={styles.header}>
-                    <ImageBackground source={require('../../img/dbg.png')} style={styles.imgbg}>
+                    <ImageBackground source={require('../../img/du.png')} style={styles.imgbg}>
                         <SafeAreaView style={{ margin: 12 }}>
                             <Image source={require('../../img/justen.jpg')} style={styles.imgs} />
 
@@ -61,7 +64,7 @@ export default class DrawerScreen extends Component {
                     <ListDrawer name="Reports" icon="minus-circle" colors="red" bgcolor="red"></ListDrawer>
                     </View>
                     <Text style={styles.dtext}>Account</Text>
-                    <ListDrawer name="Settings" icon="settings" colors="gray" bgcolor="red"></ListDrawer>
+                    <ListDrawer name="Settings" icon="settings" colors="gray" bgcolor="red" route={this._onSetting}></ListDrawer>
                     <ListDrawer name="Log Out" icon="log-out" colors="gray" route={this._onLogOut}></ListDrawer>
                     
                     
@@ -95,7 +98,8 @@ const styles = StyleSheet.create({
     imgbg: {
         height: 175,
         overflow: 'hidden',
-        opacity: 0.9,
+        
+
     },
     htext: {
         color: '#fff',

@@ -12,6 +12,8 @@ target 'adminApp' do
   #   # Pods for testing
   # end
 
+  pod 'react-native-material-kit', :path => '../node_modules/react-native-material-kit'
+
   target 'adminAppTests' do
     inherit! :search_paths
     # Pods for testing

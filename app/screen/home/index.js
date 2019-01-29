@@ -1,88 +1,98 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  FlatList
+} from "react-native";
 
-import COLORS from '../../style/color'
-import style from '../../style'
-import Header from '../../components/header'
-import RecentCard from '../../components/recent_card'
-import List from '../../components/list'
-import { recentCard } from '../../dummy/reactCard'
-import { listBuilding } from '../../dummy/listBuilding'
-import ListBuilding from '../../components/list'
+import COLORS from "../../style/color";
+import style from "../../style";
+import Header from "../../components/header";
+import RecentCard from "../../components/recent_card";
+import List from "../../components/list";
+import { recentCard } from "../../dummy/reactCard";
+import { listBuilding } from "../../dummy/listBuilding";
+import ListBuilding from "../../components/list";
 
-
-import { inject, observer } from 'mobx-react';
+import { inject, observer } from "mobx-react";
 
 @inject("auth")
 @observer
+
 export default class HomeScreen extends Component {
-    
-    componentDidMount() {
-        this.props.auth.fetchBuilding();
+    constructor(props){
+        super(props)
     }
+  componentDidMount(){
+    this.props.auth.fetchBuilding();
+  }
 
-    _onLogOut = () => {
-        this.props.auth.logOut();
-    }
+  _onLogOut = () => {
+    this.props.auth.logOut();
+  };
+  
+  _onBuilding = () => {
+    this.props.navigation.navigate("Floor");
+  };
 
-    _onBuilding = () => {
-        this.props.navigation.navigate("Floor")
-    }
-    _onSearch= () => {
-        this.props.navigation.navigate("SearchStack")
-    }
+  _onSearch = () => {
+    this.props.navigation.navigate("SearchStack");
+  };
 
-    render() {
-        const numColumns = 2;
-        const { displayName, campus } = this.props.auth.account;
-        const { building } = this.props.auth;
-        if(displayName){
-            return (
-                <SafeAreaView style={[style.container, style.background]}>
-                    <View style={style.homeheader}>
-                        <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
-                    </View>
-                    {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
-    
-                    <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
-    
-                        <View style={style.main} >
-    
-                            {/* <Header name="Steve.Job" campus="South Campus" /> */}
-    
-                            <View style={{ marginBottom: 15, marginTop: 10 }}>
-                                <Text style={style.h}>Recent Building</Text>
-                            </View>
-                            <View style={{ flex: 1, }} >
-    
-                                <FlatList
-                                    data={recentCard}
-                                    renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
-                                    numColumns={numColumns}
-                                />
-                            </View>
-    
-    
-                            <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-                                <View style={{ flex: 1, marginBottom: 10 }} >
-    
-                                </View>
-    
-    
-                            </View>
-    
-                            {
-                                building.map(m => {
-                                    return (<ListBuilding key={m.key} name={m.name} />)
-                                })
-                            }
-    
-    
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
-    
-            );
-        }
-    }
+  render() {
+    const numColumns = 2;
+    const { building } = this.props.auth;
+    const { displayName, campus } = this.props.auth.account;
+    return (
+      <SafeAreaView style={[style.container, style.background]}>
+        <View style={style.homeheader}>
+          <Header
+            search={this._onSearch}
+            name={displayName}
+            campus={campus.name}
+            drawer={() => this.props.navigation.openDrawer()}
+          />
+        </View>
+        {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
+
+        <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg}>
+          <View style={style.main}>
+            {/* <Header name="Steve.Job" campus="South Campus" /> */}
+
+            <View style={{ marginBottom: 15, marginTop: 10 }}>
+              <Text style={style.h}>Recent Building</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <FlatList
+                data={recentCard}
+                renderItem={({ item }) => (
+                  <RecentCard onClick={this._onBuilding} data={item} />
+                )}
+                numColumns={numColumns}
+              />
+            </View>
+
+            <View style={{ flexDirection: "row", marginBottom: 15 }}>
+              <View style={{ flex: 1, marginBottom: 10 }} />
+            </View>
+                  <FlatList
+                  data={building}
+                  renderItem={({item ,index})=>(
+                    <ListBuilding key={item.key} name={item.name} index={item.name.trim().substring(0,1).toLowerCase()}/>
+                    )}
+                  />
+            {/* {
+              building.map(m => { 
+              return <ListBuilding key={m.key} name={m.name} />;
+            })
+            } */}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 }

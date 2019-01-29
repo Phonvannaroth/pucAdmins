@@ -1,4 +1,4 @@
-import {auth,userRef,buildingRef} from './data';
+import {auth,userRef,buildingRef, classroomRef} from './data';
 import {pushToObject, pushToArray} from './mapping';
 
 export function authStateChanged(callback){
@@ -12,6 +12,7 @@ export function authStateChanged(callback){
     })
 }
 
+
 export function signIn(email,password){
     return auth().signInWithEmailAndPassword(email,password)
 }
@@ -23,11 +24,18 @@ export function getAccount(uid,callback){
     })
 }
 
+
 export function getBuilding(campusKey,callback){
     return buildingRef(campusKey).onSnapshot(docs=>{
         callback(pushToArray(docs))
     })
 }
+
+// export function getClassroom(classroomKey,callback){
+//     return classroomRef(classroomKey).onSnapshot(docs=>{
+//         callback(pushToArray(docs))
+//     })
+// }
 
 export function signOut(){
     return auth().signOut();
