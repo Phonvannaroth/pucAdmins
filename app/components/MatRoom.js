@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View,TouchableOpacity} from 'react-native'
 
-export default MatRoom=({roomName,floorName,buildingName,onSelected})=> {
+import { Text,Image, StyleSheet, View, ImageBackground,TouchableOpacity } from 'react-native'
 
     return (
-        <TouchableOpacity onPress={onSelected}>
-        <View style={styles.flex}>
-          <View style={styles.h1}>
-            <Text style={styles.p1}>{roomName}</Text>
-            <Text style={styles.p2}>{floorName}</Text>
-            <Text style={styles.p3}>{buildingName}</Text>
-          </View>
-         </View>
-         </TouchableOpacity>
+
+      <TouchableOpacity onPress={onClick}>
+      <View style={styles.flex}>
+      <View style={styles.profile}>  
+      <View style={styles.profile}>
+      <Image source={require('../img/room.png')} style={{width:45,height:45}}></Image>
+        
+        <View style={styles.h1}>
+          <Text style={styles.p1}>{name}</Text>
+          <Text style={styles.p2}>LCD:{Lcd} Student:{student} Prof:{Prof}</Text>
+          <View style={styles.activepoint}></View>
+        </View>
+       </View>
+       </View>
+       </View>
+       </TouchableOpacity>
+
     )
 
 }

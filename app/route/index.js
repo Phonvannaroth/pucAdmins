@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Octicons';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
 import HomeScreen from './../screen/home'
 import SettingScreen from './../screen/setting'
 import FloorScreen from '../screen/floor';
@@ -11,35 +11,51 @@ import WelcomeScreen from '../screen/welcome';
 import LoginScreen from '../screen/login';
 import DrawerScreen from '../screen/drawer';
 import About from '../screen/about'
+import ProfileScreen from '../screen/profile'
+import Icon from 'react-native-vector-icons/Ionicons'
+
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image
+        source={require('../img/bg.jpg')}
+        style={{ width: 30, height: 30 }}
+      />
+    );
+  }
+}
 
 const HomeTab = createStackNavigator({
   HomeStack: {
     screen: HomeScreen,
-    navigationOptions: {
-      header: null
-    }
-  },
+    navigationOptions: {header: null, headMode: 'none'}
+},
   Floor: FloorSc,
   Room: RoomScreen,
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: { 
+      header: null, headMode: 'none'
+    
+  },
+},
   SearchStack: {
     screen: SearchScreen,
-    navigationOptions: {
-      header: null,
-
-    }
+    navigationOptions: { 
+      header: null, headMode: 'none'
+    
   },
-
-
-
+    
+    
+  },
+  
 
 },
-  {
-    // headerMode: 'none'
-  }
+ 
 );
 const TabNavigator = createBottomTabNavigator({
   Home: HomeTab,
-  Setting: SettingScreen,
+  Setting: ProfileScreen,
 
 },
 
@@ -49,14 +65,15 @@ const TabNavigator = createBottomTabNavigator({
         const { routeName } = navigation.state;
         //   let iconName;
         if (routeName === 'Home') {
-          iconName = `home${''}`;
-        } else if (routeName === 'Setting') {
-          iconName = `settings${''}`;
+          iconName ='ios-home';
+        } 
+        else if (routeName === 'Setting') {
+          iconName = `ios-pulse`;
         }
 
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={32} color={tintColor} />;
+        return <Icon name={iconName} size={32} color={tintColor} />;
       },
     }),
     tabBarComponent: TabNavigator,
@@ -78,7 +95,7 @@ const Mydrawer = createDrawerNavigator({
 }, {
     initialRouteName: 'Info',
     contentComponent: DrawerScreen,
-    drawerWidth: 320
+    drawerWidth: 340
   });
 const AppStack = createSwitchNavigator({
   Welcome: WelcomeScreen,

@@ -1,47 +1,28 @@
-import React, { Component } from "react";
-import { Text, ScrollView, StyleSheet, View } from "react-native";
-import { floorData } from "./../../../dummy/roomData";
-import { inject, observer } from "mobx-react";
-import { FlatList } from "react-native-gesture-handler";
-import MatRoom from "../../../components/MatRoom";
+import React, { Component } from 'react'
+import { Text, ScrollView, StyleSheet, View } from 'react-native'
+import MatRoom from './../../../components/MatRoom'
+import {floorData} from './../../../dummy/roomData'
 
-@inject("classroom")
-@observer
+import { inject, observer } from 'mobx-react';
+
+@inject("auth")
 export default class RoomScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    this.props.classroom.fetchclassroom();
-  }
+    this.props.auth.fetchBuilding();
+}
 
-  _onSelectedRoom(){
-
-  }
-
-  _renderItem=(item)=>{
-    const {building,name,floor}=item;
-    // const data={building,name,floor};
-    return(
-      <MatRoom 
-      roomName={name}
-      floorName={floor.name}
-      buildingName ={building.name}
-        onSelected={()=>this._onSelectedRoom(item)}
-      />
-    )
-  }
+_onProfile = () => {
+    this.props.navigation.navigate("Profile")
+}
   render() {
-    const { classroom } = this.props.classroom;
-    console.log(classroom)
+   
     return (
-      <ScrollView>
-        <FlatList
-          key={(item,index)=>index.toString()}
-          data={classroom}
-          renderItem={({ item }) =>this._renderItem(item)}
-        />
+        <ScrollView>
+        {
+          floorData.map(m=>{
+            return (<MatRoom onClick={this._onProfile} data={m} />)
+          })
+        }
       </ScrollView>
     );
   }

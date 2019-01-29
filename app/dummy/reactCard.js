@@ -21,7 +21,7 @@ export const recentCard =[
         letter: 'S',
         building:'Steel Building',
         floor: 5,
-        color: '#F27676',
+        color: '#CCCCFF',
         status: true,
     },
     {

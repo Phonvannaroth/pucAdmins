@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View,Image, ImageBackground,TouchableOpacity } from 'react-native'
-
+import Icon from 'react-native-vector-icons/Ionicons';
 export default class floor extends Component {
   render() {
-    const{img, name, detial}=this.props.data
+    const{img, name, detial}=this.props
     const {onClick}=this.props;
     return (
       <TouchableOpacity onPress={onClick}>
-      <View style={styles.flex}>
-      <View style={styles.profile}>  
-      <View style={styles.profile}>
-      <Image source={{uri:img}}
-        style={styles.img}/>
-        
-        <View style={styles.h1}>
-          <Text style={styles.p1}>{name} Floor</Text>
-          <Text style={styles.p2}>{detial} Room</Text>
-          <View style={styles.activepoint}></View>
+      <View style={styles.container}>
+
+        <Image source={require('../img/floor.png')} style={styles.img}></Image>
+        <View style={{width:2, height:40, backgroundColor:'red', borderWidth:0.3 , }}>
+      <Text></Text>
         </View>
+        <View style={styles.h1}>
+        
+          <Text style={styles.p1}>{name} </Text>
+          <Text style={styles.p2}>{detial} <Icon size={12} name='ios-star' color='orange' style={{marginRight:15}} ></Icon>  Room</Text>
+          
+        </View>
+        <Icon size={18} name='ios-arrow-forward' color='#CC61C8' style={{marginRight:15}} ></Icon>
        </View>
-       </View>
-       </View>
+
        </TouchableOpacity>
     )
   }
@@ -33,33 +34,23 @@ const styles = StyleSheet.create({
     borderRadius:35,
     overflow: "hidden",
     justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#CC61C8'
     
   },
-    flex:{
-        backgroundColor: '#f8f9fa',
-        height: 90,
-        padding: 12,
-        display: 'flex',
+  container:{
+        padding: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+     
 
     },
-    activepoint:{
-      width:20,
-      height: 20,
-      borderRadius:10 ,
-      backgroundColor: '#42b72a',
-      borderColor: '#fff',
-      borderWidth: 2,
-      
-    },
-    profile:{
-      width:100,
-      height: 100,
-      flexDirection: 'row',
-    },
+   
+
     h1:{
-      paddingLeft: 21,
-      width: 400,
+      paddingLeft:5,
       flexDirection: 'column',
+      flex:1,
     },
     p1:{
     fontSize:18,

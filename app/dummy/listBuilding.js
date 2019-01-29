@@ -1,31 +1,35 @@
 
-export const listBuilding=[
+export const listLecture=[
+    
     {
-        key: 1,
-        letter: 'M',
-        building:'Main Building',
-        floor: 9,
-        status: true,
+        img:"https://www.paulweiss.com/media/3976304/googe_c_web.jpg",
+        name:'Jammy',
+        detial: '14'
     },
     {
-        key: 2,
-        letter: 'V',
-        building:'Vann Building',
-        floor: 7,
-        status: false,
+        img:"https://scontent.fpnh6-1.fna.fbcdn.net/v/t1.0-9/32775100_1023689577784714_8016046340423286784_o.jpg?_nc_cat=104&_nc_ht=scontent.fpnh6-1.fna&oh=eb609fb5e47fced48eda144f5e5dd0a9&oe=5C8C63C5",
+        name:'Ream',
+        detial: '23'
     },
     {
-        key: 3,
-        letter: 'S',
-        building:'Steel Building',
-        floor: 5,
-        status: true,
+        img:"https://scontent.fpnh6-1.fna.fbcdn.net/v/t1.0-9/37856919_844973609045227_2086519228638167040_o.jpg?_nc_cat=108&_nc_ht=scontent.fpnh6-1.fna&oh=8b14ee7bbd9d854dba8473993f6da298&oe=5CD0FE06",
+        name:'Jack',
+        detial: '82'
     },
     {
-        key: 4,
-        letter: 'H',
-        building:'Hight Building',
-        floor: 15,
-        status: false,
+        img:"https://scontent.fpnh6-1.fna.fbcdn.net/v/t1.0-9/26733862_1517600248338968_5361297666263539240_n.jpg?_nc_cat=104&_nc_ht=scontent.fpnh6-1.fna&oh=0a2272cafdc676c80d1b16139dad759f&oe=5CD7BB24",
+        name:'Lady',
+        detial: '46'
     },
+    {
+        img:"https://scontent.fpnh6-1.fna.fbcdn.net/v/t1.0-9/396155_324825367547762_1777159154_n.jpg?_nc_cat=106&_nc_ht=scontent.fpnh6-1.fna&oh=53029ee9244141c4a141ed94d40a951a&oe=5CCEAF82",
+        name:'Male',
+        detial: '2 Hall and 9 '
+    },
+    {
+        img:"https://lh5.googleusercontent.com/p/AF1QipMJNJFyKoQ8PEDM9U4iJ87dEcDB-bEJIo1TWyB-=w408-h306-k-no",
+        name:'Seven',
+        detial: '19',
+    },
+   
 ]

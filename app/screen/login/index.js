@@ -7,6 +7,7 @@ import { TextField } from 'react-native-material-textfield';
 
 @inject("auth")
 @observer
+
 export default class LoginScreen extends Component {
     constructor(props){
         super(props)
@@ -33,14 +34,19 @@ export default class LoginScreen extends Component {
     return (
     <ImageBackground style={{width:"100%",height:"100%"}} source={require('./../../img/du.png')}>
         <View style={{alignItems:"center", marginTop:60,}}>
+
         <Image style={styles.img} source={require('./../../img/Logo-2.jpg')}/>
+
         <Text style={{color:'#fff', paddingTop: 6,}}>Sīla, Samādhi, Pannā</Text>
         <Text style={{color:'#fff',}}>Paññāsāstra University of Cambodia</Text>
         </View>    
       <SafeAreaView style={styles.fl}>
+      {/* <Text style={{fontSize:22,color:'#fff'}}> PUC ADMINISTRATOR</Text> */}
         <View style={styles.div}>
+
         <TextField
         style={styles.input}
+
         value={email}
         onChangeText={email=>this.setState({email})}
         label="Email"
@@ -55,24 +61,29 @@ export default class LoginScreen extends Component {
         />
         </View>
         <TouchableOpacity onPress={this._onLogin}>
+
         <LinearGradient colors={['#0082c8', '#0082c8', '#667db6',]} style={{ alignItems: 'center', marginTop: 22, borderRadius: 12, overflow: "hidden", height: 50, justifyContent: 'center', width:200, }}>            
         {
         process? 
         <ActivityIndicator size="large" color="#f1f2f3" />
         :<View>
         <Text style={styles.text}>Log in</Text>
+
         </View>
         }
         </LinearGradient>
         </TouchableOpacity>
         <View style={{marginTop:200, flex:2}}>
         <View style={{alignItems:"center", justifyContent:"center",flexDirection:'row'}}>
+
         <Image style={{width: 40, height:40, borderRadius:20,}} source={require('./../../img/Logo-2.jpg')}/>
         <Text style={{fontSize:22,color:'#fff'}}> PUC ADMIN</Text>
+
         </View>
         <View style={{alignItems:"center", justifyContent:"center"}}>
-        <Text style={{marginTop:12,color: "#fff", fontSize: 10, }}>Copyright © 2019</Text>
-        <Text style={{marginTop:6, color: "#fff", fontSize: 10, }}>Develop by PUC Computer Science</Text>
+        
+        <Text style={{marginTop:2,color: "#fff", fontSize: 10, }}>All rights reserved.</Text>
+        <Text style={{marginTop:6, color: "#fff", fontSize: 10, }}>Developed by PUC Computer Science</Text>
         </View>
         </View>
       </SafeAreaView>

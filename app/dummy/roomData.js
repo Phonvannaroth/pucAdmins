@@ -1,4 +1,4 @@
-export const floorData=[
+export const roomData=[
     {
         RoomName:"Bopha",
         BuildingName:"Vann",

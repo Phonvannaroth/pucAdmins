@@ -20,12 +20,82 @@ import ListBuilding from "../../components/list";
 
 import { inject, observer } from "mobx-react";
 
-@inject("auth")
+@inject("auth","building")
 @observer
-
 export default class HomeScreen extends Component {
-    constructor(props){
-        super(props)
+    
+    componentDidMount() {
+        this.props.auth.fetchBuilding();
+    }
+
+    _onLogOut = () => {
+        this.props.auth.logOut();
+    }
+
+    _onBuilding(item) {
+        this.props.building.fetchSelectedBuilding(item)
+        this.props.navigation.navigate("Floor")
+    }
+    _onSearch= () => {
+        this.props.navigation.navigate("SearchStack")
+    }
+
+    render() {
+        const numColumns = 2;
+        const { displayName, campus } = this.props.auth.account;
+        const { building } = this.props.auth;
+        return (
+
+            <SafeAreaView style={[style.container, style.background]}>
+                <View style={style.homeheader}>
+                    <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
+                </View>
+                {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
+
+                <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
+
+                    <View style={style.main} >
+
+                        {/* <Header name="Steve.Job" campus="South Campus" /> */}
+
+                        <View style={{ marginBottom: 15, marginTop: 10 }}>
+                            {/* <Text style={style.h}>Recent Building</Text> */}
+                            <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>Recent Building</Text>
+                        </View>
+                        <View style={{ flex: 1, }} >
+
+                            <FlatList
+                                data={recentCard}
+                                renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
+                                numColumns={numColumns}
+                            />
+                        </View>
+
+                        
+                        <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+                            <View style={{ flex: 1, marginTop: 10 }} >
+                            {/* <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>List Building</Text> */}
+                            </View>
+
+
+                        </View>
+{/* 
+                        {
+                            building.map(m => {
+                                return (<ListBuilding onClick={this._onBuilding(item)} key={m.key} name={m.name} />)
+                            })
+                        } */}
+                        <FlatList
+                         data={building}
+                         renderItem={({ item }) => ( <ListBuilding onClick={()=>this._onBuilding(item)} name={item.name} />)}
+                        />
+
+
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+
+        );
     }
   componentDidMount(){
     this.props.auth.fetchBuilding();

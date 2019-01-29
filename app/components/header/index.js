@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/EvilIcons';
 
 // create a component
 class Header extends Component {
@@ -11,7 +11,7 @@ class Header extends Component {
             <View style={styles.container}>
             <View style={styles.header}>
             <TouchableOpacity  onPress={drawer}>
-                <Ionicons name="align-left" size={32} color="#2b2b2b" />
+                <Ionicons name="navicon" size={42} color="gray" />
                 </TouchableOpacity>
                 <View style={styles.middleHeader}>
                     <View style={styles.center}>
@@ -21,7 +21,7 @@ class Header extends Component {
                     </View>
                 </View>
                 <TouchableOpacity  onPress={search}>
-                    <Ionicons name="search" size={32} color="#2b2b2b" />
+                    <Ionicons name="search" size={42} color="gray" />
                 </TouchableOpacity>
             </View>
         </View>

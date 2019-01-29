@@ -1,57 +1,88 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-export default class ListFloor extends Component {
-    render() {
-        const { floor, letter, building, color, status } = this.props.data
+
+export default ListFloor=({name,onClick,status})=> {
         const verify = status ? '#2CFF1A' : '#ef7164'
-        const icon = status ?'check-circle': 'x-circle'
+        const icon = status ? 'check-circle' : 'x-circle';
+        console.log(name)
         return (
-            <TouchableOpacity >
+            <TouchableOpacity onPress={onClick}>
                 <View style={styles.card}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.circle} backgroundColor="#E7DDFA" >
-                            <Text style={styles.campus}>{letter}</Text>
+                    
+                        <View style={styles.active} backgroundColor={status}>
+                            <View style={styles.circle} backgroundColor="#CC61C8">
+                                <View style={{
+                                    width: 60,
+                                    height: 60,
+                                    // backgroundColor: '#FADDDD',
+                                    borderRadius: 30,
+                                    backgroundColor: '#fff',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }} >
+                                    {/* <ImageBackground source={{uri:img}} style={{ */}
+                                    <ImageBackground source={require('../../img/stair.png')} style={{   
+                                        width: 30,
+                                        height: 30,
+                                        // backgroundColor: '#FADDDD',
+                                        borderRadius: 15,
+                                        backgroundColor: '#fff',
+                                        overflow: 'hidden',
+                                       
+                                        alignItems: 'center',
+                                    }}>
+                                    </ImageBackground>
+
+                                </View>
+
+                            </View>
+                            <Text style={styles.floor}>{name}</Text>
+                           
                         </View>
+
                         
-                            <View style={{flex:1, marginLeft:10}}>
-                                <Text style={styles.building}>{building}</Text>
-                                <Text style={styles.floor}>{floor} Floors</Text>
-                                <View style={styles.status} backgroundColor={verify}>
-                                <Icon size={11} name={icon}></Icon>
-                            </View>
-                            </View>
-                            <View style={{justifyContent:'center', alignContent:'center'}}>
-                            <Icon style={styles.icon} name="chevron-right" ></Icon>
-                            </View>
-                            
-                        
-                    </View>
+                           
+                          
+                     
+                   
+
+                    
                 </View>
             </TouchableOpacity>
         )
     }
-}
 const styles = StyleSheet.create({
     card: {
 
-        height: 80,
-        backgroundColor: '#fff',
-        padding: 12,
-        margin: 1,
-        shadowColor: '#D3D3D3',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-    },
-    circle: {
-        width: 60,
-        height: 60,
-        // backgroundColor: '#FADDDD',
-        borderRadius: 30,
+        height: 85,
+        width: 70,
+  
+        paddingBottom:  15,
+        paddingTop: 15,
+    
+     
         justifyContent: 'center',
         alignItems: 'center',
+        marginLeft: 4,
+    },
+    active: {
+        width: 65,
+        height: 65,
+        borderRadius: 32.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+       
+    },
+    circle: {
+        width: 65,
+        height: 65,
+        // backgroundColor: '#FADDDD',
+        borderRadius: 32.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 5,
 
     },
     campus: {
@@ -73,7 +104,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     floor: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#2b2b2b',
     },
     status: {
@@ -82,7 +113,7 @@ const styles = StyleSheet.create({
         borderRadius: 7.5,
         justifyContent: 'center',
         alignItems: 'center',
-       
+
 
     }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
 import {
     View,
     Text,
@@ -6,6 +7,7 @@ import {
     TouchableOpacity,
     SafeAreaView,
     Image,
+    FlatList,
     ImageBackground
 } from 'react-native'
 
@@ -13,61 +15,64 @@ import { inject, observer } from 'mobx-react';
 import { ScrollView } from 'react-native-gesture-handler';
 import ListDrawer from '../../components/listDrawer'
 
-@inject("auth")
+@inject("auth", "institutes")
 @observer
 
 export default class DrawerScreen extends Component {
     componentDidMount() {
         this.props.auth.fetchBuilding();
+        this.props.institutes.fetchInstitutes();
     }
 
     _onLogOut = () => {
         this.props.auth.logOut();
     }
 
-    _onBuilding = () => {
-        this.props.navigation.navigate("Floor")
-    }
-    _onSetting =()=>{
-        this.props.navigation.navigate("Setting")
+    _onInstitutes = () => {
+        // this.props.navigation.navigate("Floor")
     }
     render() {
         const { displayName, campus, email } = this.props.auth.account;
+        const { data } = this.props.institutes;
         return (
             <View style={styles.container}>
 
                 <View style={styles.header}>
-                    <ImageBackground source={require('../../img/du.png')} style={styles.imgbg}>
-                        <SafeAreaView style={{ margin: 12 }}>
-                            <Image source={require('../../img/justen.jpg')} style={styles.imgs} />
 
-                            <View style={{ flexDirection: 'column', marginHorizontal: 10 }}>
-                                <Text style={styles.htext}>{displayName}</Text>
-                                <Text style={styles.text}>{email}</Text>
-                            </View>
+                    {/* <ImageBackground source={require('../../img/dbg.png')} style={styles.imgbg}> */}
+                    <SafeAreaView style={{ margin: 12 }}>
+                        <Image source={require('../../img/p3.jpg')} style={styles.imgs} />
 
-                        </SafeAreaView>
-                    </ImageBackground>
+                        <View style={{ flexDirection: 'column', marginHorizontal: 10 }}>
+                            <Text style={styles.htext}>{displayName}</Text>
+                            <Text style={styles.text}>{email}</Text>
+                        </View>
+
+                    </SafeAreaView>
+                    {/* </ImageBackground> */}
 
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                   <View style={styles.bodersty}>
-                   <Text style={styles.dtext}>General Labels</Text>
-                    <ListDrawer name="Contact" icon="users"></ListDrawer>
-                    <ListDrawer name="Filter" icon="filter"></ListDrawer>
+                    <View style={styles.bodersty}>
+                        <View style={{ justifyContent: 'center' }}>
+                            <Text style={styles.dtext}>Academic Program</Text>
+                        </View>
+                        <FlatList
+                            data={data}
+                            renderItem={({ item }) => <ListDrawer onClick={this._onBuilding} name={item.name} icon='ios-journal' colors='gray' />}
+
+                        />
+
                     </View>
                     <View style={styles.bodersty}>
-                    <Text style={styles.dtext}>Management</Text>
-                    <ListDrawer name="Overview" icon="airplay" colors="orange"></ListDrawer>
-                    <ListDrawer name="Schedules" icon="clipboard" colors="green"></ListDrawer>
-                    <ListDrawer name="Booking" icon="book" colors="#6a1b9a"></ListDrawer>
-                    <ListDrawer name="Reports" icon="minus-circle" colors="red" bgcolor="red"></ListDrawer>
+                        <Text style={styles.dtext}>Management</Text>
+                        <ListDrawer name="Booking" icon="ios-bookmarks" colors="gray"></ListDrawer>
+                        <ListDrawer name="Reports" icon="ios-remove-circle" colors="gray" bgcolor="red"></ListDrawer>
                     </View>
                     <Text style={styles.dtext}>Account</Text>
-                    <ListDrawer name="Settings" icon="settings" colors="gray" bgcolor="red" route={this._onSetting}></ListDrawer>
-                    <ListDrawer name="Log Out" icon="log-out" colors="gray" route={this._onLogOut}></ListDrawer>
-                    
-                    
+
+                    <ListDrawer name="Settings" icon="ios-options" colors="gray" bgcolor="red"></ListDrawer>
+                    <ListDrawer name="Log Out" icon="ios-log-out" colors="gray" route={this._onLogOut}></ListDrawer>
 
                 </ScrollView>
 
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 175,
-        backgroundColor: '#EDEFEE',
+        backgroundColor: '#CC61C8',
 
     },
     imgs: {
@@ -110,18 +115,20 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '400',
     },
-    dtext:{
-             marginHorizontal:15,
-             marginTop: 10,
-             fontSize: 16,
-             color: "lightgray",
+    dtext: {
+        marginHorizontal: 15,
+        marginTop: 10,
+        fontSize: 16,
+        color: "#CC61C8",
+        fontSize: 18,
+        fontWeight: '600',
     },
-    bodersty:{
-    borderBottomColor: '#D3D3D3',
-    borderBottomWidth: 0.5,
-    borderRightColor: '#D3D3D3',
-    borderRightWidth: 0.5,
-    shadowColor: '#d6d7da',
-}
+    bodersty: {
+        borderBottomColor: '#D3D3D3',
+        borderBottomWidth: 0.5,
+        borderRightColor: '#D3D3D3',
+        borderRightWidth: 0.5,
+        shadowColor: '#d6d7da',
+    }
 
 })
