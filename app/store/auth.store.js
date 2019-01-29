@@ -1,12 +1,13 @@
 import { observable, action } from "mobx";
-import { authStateChanged, signIn,getAccount,getBuilding, signOut } from "../services/auth";
+import { authStateChanged, signIn,getAccount,getBuilding, signOut, getClassroon } from "../services/auth";
 
 export default class Auth{
     @observable user= null;
     @observable loading=false;
     @observable account=null;
-    @observable process=false;
+    @observable process =false;
     @observable building=[];
+    @observable classroom=[];
 
     constructor(){
     }
@@ -15,6 +16,7 @@ export default class Auth{
     fetchAuthStateChange(callback) {
         this.process=true;
         authStateChanged(user => {
+            this.process=true;
             if(user){
                 const {uid}=user;
                 this.user = user;
@@ -52,7 +54,16 @@ export default class Auth{
             this.building=res;
             this.loading=false;
         })
+    } @action
+    fetchclassroom(){
+        this.loading=true;
+        const {classroom}=this.account;
+        getClassroom(classroom.key,res=>{
+            this.classroom=res;
+            this.loading=false;
+        })
     }
+
 
     @action
     logOut(callback){

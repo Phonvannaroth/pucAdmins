@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Text, View,TextInput,TouchableOpacity,SafeAreaView, Image,ImageBackground,ActivityIndicator } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { inject, observer } from 'mobx-react';
-import { Icon } from 'react-native-elements';
+import { TextField } from 'react-native-material-textfield';
+
+
 @inject("auth")
 @observer
 
@@ -16,7 +18,6 @@ export default class LoginScreen extends Component {
     }
 
     _onLogin=()=>{
-        
         const {email,password}=this.state;
         this.props.auth.logIn(email,password,(success,res)=>{
             if(success){
@@ -33,46 +34,51 @@ export default class LoginScreen extends Component {
     return (
     <ImageBackground style={{width:"100%",height:"100%"}} source={require('./../../img/du.png')}>
         <View style={{alignItems:"center", marginTop:60,}}>
-        <Image style={styles.img} source={require('../../img/Logo.jpg')}/>
+
+        <Image style={styles.img} source={require('./../../img/Logo-2.jpg')}/>
+
         <Text style={{color:'#fff', paddingTop: 6,}}>Sīla, Samādhi, Pannā</Text>
         <Text style={{color:'#fff',}}>Paññāsāstra University of Cambodia</Text>
         </View>    
       <SafeAreaView style={styles.fl}>
       {/* <Text style={{fontSize:22,color:'#fff'}}> PUC ADMINISTRATOR</Text> */}
         <View style={styles.div}>
-        <TextInput
-        style={styles.input}a4
-        
+
+        <TextField
+        style={styles.input}
+
         value={email}
         onChangeText={email=>this.setState({email})}
-        placeholder="Email"
+        label="Email"
         >
-        </TextInput>
-         <TextInput
+        </TextField>
+         <TextField
          style={styles.input}
         value={password}
         onChangeText={password=>this.setState({password})}
-        placeholder="Password"
+        label="Password"
         secureTextEntry={true}
         />
         </View>
         <TouchableOpacity onPress={this._onLogin}>
-        <LinearGradient colors={['#0082c8', '#0082c8', '#667db6',]} style={{ alignItems: 'center', marginTop: 22, borderRadius: 12, overflow: "hidden", height: 50, justifyContent: 'center', width:300, }}>  
-            
-            
+
+        <LinearGradient colors={['#0082c8', '#0082c8', '#667db6',]} style={{ alignItems: 'center', marginTop: 22, borderRadius: 12, overflow: "hidden", height: 50, justifyContent: 'center', width:200, }}>            
         {
         process? 
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#f1f2f3" />
         :<View>
-            <Text style={styles.text} > {process?"":"Log in"}</Text>
+        <Text style={styles.text}>Log in</Text>
+
         </View>
         }
         </LinearGradient>
         </TouchableOpacity>
         <View style={{marginTop:200, flex:2}}>
         <View style={{alignItems:"center", justifyContent:"center",flexDirection:'row'}}>
-       
-       
+
+        <Image style={{width: 40, height:40, borderRadius:20,}} source={require('./../../img/Logo-2.jpg')}/>
+        <Text style={{fontSize:22,color:'#fff'}}> PUC ADMIN</Text>
+
         </View>
         <View style={{alignItems:"center", justifyContent:"center"}}>
         
@@ -102,14 +108,7 @@ const styles={
         borderRadius: 60,
     },
     input:{
-        borderColor: '#ebebeb',
-        borderWidth: 1,
         width: '100%',
-        marginTop: 12,
-        height: 50,
-        borderRadius: 12,
-        paddingLeft: 12,
-        backgroundColor: '#f6f8fa',
         fontSize: 21,
         
     },

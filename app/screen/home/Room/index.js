@@ -24,8 +24,8 @@ _onProfile = () => {
           })
         }
       </ScrollView>
-    )
+    );
   }
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

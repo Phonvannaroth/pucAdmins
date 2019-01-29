@@ -18,9 +18,9 @@ componentDidMount(){
 }
   render() {
     return (
-      <View>
-        <Image/>
+      <View>         
+        <Image style={{width:'100%', height:'100%'}} source={require('./../../img/oppa.jpg')}/>
       </View>
-    )
-  }
+    );
+}
 }
