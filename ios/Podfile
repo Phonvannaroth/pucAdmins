@@ -12,9 +12,11 @@ target 'adminApp' do
   #   # Pods for testing
   # end
 
-  pod 'react-native-material-kit', :path => '../node_modules/react-native-material-kit'
+  # pod 'react-native-material-kit', :path => '../node_modules/react-native-material-kit'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'adminAppTests' do
     inherit! :search_paths
