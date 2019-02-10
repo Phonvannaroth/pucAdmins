@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // create a component
 class Verify extends Component {
     render() {
-        const {Ionicons, Txt, Color, Click} = this.props
+        const {Ionicons, Txt, Color, onClick} = this.props
         return (
-            <TouchableOpacity onPress={Click}>
+            <TouchableOpacity onPress={onClick}>
             <View style={styles.sub} >
                 <View style={styles.list}>
                     <Icon size={24} name={Ionicons} color={Color} style={{ flex: 1 }}></Icon>

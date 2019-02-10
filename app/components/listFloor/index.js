@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Feather'
 export default ListFloor=({name,onClick,status})=> {
         const verify = status ? '#2CFF1A' : '#ef7164'
         const icon = status ? 'check-circle' : 'x-circle';
-        console.log(name)
         return (
             <TouchableOpacity onPress={onClick}>
                 <View style={styles.card}>

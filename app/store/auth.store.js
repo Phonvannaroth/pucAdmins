@@ -1,5 +1,6 @@
 import { observable, action } from "mobx";
 import { authStateChanged, signIn,getAccount,getBuilding, signOut } from "../services/auth";
+import { getEnvironment } from "../services/environment";
 
 export default class Auth{
     @observable user= null;
@@ -7,9 +8,11 @@ export default class Auth{
     @observable account=null;
     @observable process=false;
     @observable building=[];
+    @observable campus=null;
+    @observable config=null;
+    @observable term=null;
 
-    constructor(){
-    }
+    constructor(){}
 
     @action
     fetchAuthStateChange(callback) {
@@ -20,14 +23,21 @@ export default class Auth{
                 this.user = user;
                 getAccount(uid,res=>{
                     this.account=res;
-                    this.process=false;
-                    callback(true,res)
+                    const {campus,program}=res;
+                    this.campus=campus;
+                    getEnvironment(program.key,config=>{
+                        this.config=config;
+                        const {term}=config;
+                        this.term=term;
+                        this.process=false;
+                        callback(true,res)
+                    })
                 })
             }
             else{
                 this.user=null;
                 this.process=false;
-                callback(user)
+                callback(false,null)
             }
         });
     }

@@ -12,6 +12,7 @@ import LoginScreen from '../screen/login';
 import DrawerScreen from '../screen/drawer';
 import About from '../screen/about'
 import ProfileScreen from '../screen/profile'
+import ViewScheduleScreen from '../screen/viewSchedule'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 class LogoTitle extends React.Component {
@@ -39,6 +40,7 @@ const HomeTab = createStackNavigator({
     
   },
 },
+
   SearchStack: {
     screen: SearchScreen,
     navigationOptions: { 
@@ -51,11 +53,34 @@ const HomeTab = createStackNavigator({
   
 
 },
+
+
  
 );
+
+const SettingTab = createStackNavigator({
+  HomeStack: {
+    screen: SettingScreen,
+    navigationOptions: {header: null, headMode: 'none'}
+},
+  
+ViewSchedule: {
+  screen: ViewScheduleScreen,
+  navigationOptions: { 
+    header: null, headMode: 'none'
+  
+},
+},
+   
+},
+ 
+);
+
+
+
 const TabNavigator = createBottomTabNavigator({
   Home: HomeTab,
-  Setting: ProfileScreen,
+  Setting: SettingTab,
 
 },
 
