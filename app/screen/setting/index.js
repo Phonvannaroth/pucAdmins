@@ -129,7 +129,7 @@ export default class SettingScreen extends Component {
                                         borderBottomWidth: 5,
                                     }}>
 
-                                        <Text style={{ marginBottom: 10, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>List Checked Schedule</Text>
+                                        <Text style={{ marginBottom: 10, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>List Today Schedule</Text>
 
                                     </View>
                                 </View>

@@ -93,8 +93,7 @@ export default class HomeScreen extends Component {
     render() {
         const numColumns = 50;
         const { displayName, campus } = this.props.auth.account;
-        const { building } = this.props.building;
-        const { data } = this.props.schedule;
+        const { data, building } = this.props.schedule;
         return (
             <SafeAreaView style={[style.container, style.background]}>
                 <View style={style.homeheader}>
@@ -133,7 +132,7 @@ export default class HomeScreen extends Component {
                                     borderBottomWidth: 10,
                                 }}>
                                     <FlatList
-                                        data={data}
+                                        data={building}
                                         horizontal={true}
                                         showsHorizontalScrollIndicator={false}
                                         keyboardShouldPersistTaps="always"
