@@ -20,7 +20,7 @@ export default class LoginScreen extends Component {
         const {email,password}=this.state;
         this.props.auth.logIn(email,password,(success,res)=>{
             if(success){
-                this.props.navigation.navigate("AppTab")
+                this.props.navigation.navigate("Wellcome")
             }
             else{
                 alert("Invalid email and password")

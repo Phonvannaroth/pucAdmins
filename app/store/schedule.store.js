@@ -23,6 +23,7 @@ export default class Schedule{
         this.loading=true;
         getSchedule(termKey,campusKey,time,day,snpashort => {
             this.building=groupBy(snpashort,"room.building.key","room.building.name")
+            console.log(this.building)
             if(snpashort.length>=settings.Size){
                 this.lastVisible=snpashort[snpashort.length-1];
                 this.done=false;

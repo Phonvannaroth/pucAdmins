@@ -9,7 +9,7 @@ import ListFloor from '../../../components/listFloor';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { FlatList } from 'react-native-gesture-handler';
 import { toDateKey,toCalendar, currentDay, hourSchedule } from '../../../services/mapping';
-@inject("auth", "building", "room", 'floor')
+@inject("auth", "building", "room", 'floor', "profile")
 @observer
 
 export default class FloorSc extends Component {
@@ -23,7 +23,9 @@ export default class FloorSc extends Component {
         const { term } = this.props.auth;
         this.props.floor.fetchData(term.key, currentDay(),hourSchedule());
     }
-    _onRoom = () => {
+    
+    _onRoom = (item) => {
+        this.props.profile.fetchSelectedRoom(item)
         this.props.navigation.navigate("Profile")
     }
 
@@ -51,7 +53,7 @@ export default class FloorSc extends Component {
         const checkIn = item[this.state.dateKey];
         const checkMan = item[this.state.dateKey] ? item[this.state.dateKey].user.displayName : null;
         const {instructor}=item;
-        const instructorName=instructor?instructor.full_name:'Unknown';
+        const instructorName=instructor?instructor.first_name:'Unknown';
         if (checkIn) {
             const { checkDate } = checkIn;
             const dateMemo = toCalendar(checkDate);
@@ -61,7 +63,7 @@ export default class FloorSc extends Component {
                 Time={item.session.fromHours}
                 fromTime={item.session.fromHours}
                 toTime={item.session.toHours}
-                teacher={item.instructor.full_name}
+                teacher={instructorName}
                 subject={item.schedule_subject.subject.name}
                 checker={checkMan}
                 status={item[this.state.dateKey].status.text}

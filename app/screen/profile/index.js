@@ -49,8 +49,6 @@ export default class ProfileScreen extends Component {
                 this.props.navigation.navigate("HomeStack");
             }
         })
-
-
     }
 
     _toggleModal = () =>
@@ -85,7 +83,7 @@ export default class ProfileScreen extends Component {
                     <ScrollView>
 
                         <ListFolder 
-                        teacher={selectedItem.instructor.full_name  }
+                        teacher={selectedItem.instructor.first_name  }
                         phone={selectedItem.instructor.mobile_phone}
                         email={selectedItem.instructor.email}
                         room={selectedItem.room.name}
