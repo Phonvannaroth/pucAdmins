@@ -1,42 +1,147 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Feather';
-import style from '../../style'
-import ListFloor from '../../components/lecturer'
-import {listBuilding} from '../../dummy/listBuilding'
+import { View, ImageBackground, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
 
-// create a component
-class SettingScreen extends Component {
+import COLORS from '../../style/color'
+import style from '../../style'
+import Header from '../../components/header'
+import RecentCard from '../../components/recent_card'
+import List from '../../components/list'
+import { recentCard } from '../../dummy/reactCard'
+import { listBuilding } from '../../dummy/listBuilding'
+import ViewSchedule from '../../components/viewSchedule'
+import Clock from '../../components/clock'
+import moment from 'moment'
+
+import { inject, observer } from 'mobx-react';
+import { currentHourToNumber, hourSchedule, currentDay, toHourSchedule, toDateKey, toCalendar } from '../../services/mapping';
+
+@inject("auth", "building", "schedule", "room", 'floor', "profile")
+@observer
+export default class SettingScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            curTime: new Date(),
+            dateKey: toDateKey(new Date())
+        }
+    }
+    componentDidMount() {
+        const { campus, term } = this.props.auth;
+        this.props.building.fetchBuilding(campus.key);
+        this.props.schedule.fetchCheckedData(term.key, campus.key, hourSchedule(), currentDay())
+        setInterval(() => {
+            this.setState({
+                curTime: new Date()
+            })
+        }, 1000)
+    }
+
+    _onLogOut = () => {
+        this.props.auth.logOut();
+    }
+    _onRoom = (item) => {
+
+        this.props.profile.fetchSelectedRoom(item)
+        this.props.navigation.navigate("ViewSchedule")
+    }
+    renderItem = (item) => {
+        const checkIn = item[this.state.dateKey];
+        const checkMan = item[this.state.dateKey]?item[this.state.dateKey].user.displayName: null;
+        console.log(checkMan)
+        if (checkIn) {
+            const { checkDate } = checkIn;
+            const dateMemo = toCalendar(checkDate);
+            return <ViewSchedule
+                onClick={() => this._onRoom(item)}
+                checkIn={dateMemo}
+                roomname={item.room.RoomName}
+                Time={item.session.fromHours}
+                fromTime={item.session.fromHours}
+                toTime={item.session.toHours}
+                teacher={item.instructor.first_name}
+                subject={item.schedule_subject.subject.name}
+                checker={checkMan}
+                status={item[this.state.dateKey].status.text?item[this.state.dateKey].status.text: 'Not Check' }
+               
+            />
+        }
+
+        return (<ViewSchedule
+            onClick={() => this._onRoom(item)}
+            roomname={item.room.RoomName}
+            Time={item.session.shift.duration}
+            fromTime={item.session.fromHours}
+            toTime={item.session.toHours}
+            teacher={item.instructor.first_name}
+            subject={item.schedule_subject.subject.name}
+            checker={checkMan}
+            status='Not Check'
+
+            
+
+        />)
+    }
+    _onBuilding1 = (item) => {
+        this.props.floor.fetchSelectedBuildingofData(item)
+        this.props.navigation.navigate("Floor")
+    }
+
+    _onSearch = () => {
+        this.props.navigation.navigate("SearchStack")
+    }
+
     render() {
+        const numColumns = 50;
+
+        const { displayName, campus } = this.props.auth.account;
+        const { building } = this.props.building;
+        const { checkedData } = this.props.schedule;
+        console.log(checkedData)
         return (
-            <SafeAreaView style={styles.container}>
-            <View style={{margin:10}}>
-            <View style={{height:50, flexDirection:'row'}}>
-            <View style={{flex:1}}>
-            <Text style={style.h}>Steel Building</Text>
-            <Text style={style.p}>Show unverified rooms</Text>
-            </View>
-            <Ionicons name="toggle-left" size={32} color="#2b2b2b" />
-            </View>
-                <ScrollView>
-               
-               
-                </ScrollView>
+            <SafeAreaView style={[style.container, style.background]}>
+                <View style={style.homeheader}>
+                    <Header
+                        drawer={() => this.props.navigation.openDrawer()}
+                        name={displayName} campus={campus.name}
+                        onClick={() => this.props.navigation.navigate('SearchStack')}
+                        search={this._onSearch}
+                    />
                 </View>
+
+
+
+                <View style={style.main} >
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={checkedData}
+                        ListHeaderComponent={
+                            <View>
+                               
+
+                                <View style={{
+                                    borderBottomColor: "#f7f9fa",
+                                    borderBottomWidth: 5,
+                                }}>
+                        
+                                    <View style={{
+                                        marginTop: 15, borderBottomColor: "#f7f9fa",
+                                        borderBottomWidth: 5,
+                                    }}>
+
+                                        <Text style={{ marginBottom: 10, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>List Checked Schedule</Text>
+
+                                    </View>
+                                </View>
+
+                            </View>
+                        }
+                        renderItem={({ item }) => this.renderItem(item)}
+                    />
+                </View>
+
             </SafeAreaView>
+
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        
-        backgroundColor: '#f7f9f9',
-    },
-});
-
-//make this component available to the app
-export default SettingScreen;

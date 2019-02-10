@@ -39,7 +39,7 @@ export default class ListLecture extends Component {
                                 </View>
 
                             </View>
-                            <Text style={styles.floor}>{name} Floor</Text>
+                            <Text style={styles.floor}>{name}</Text>
                            
                         </View>
 

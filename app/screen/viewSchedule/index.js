@@ -5,7 +5,7 @@ import { Container, Header, Content, Tab, Tabs } from 'native-base';
 import { CheckBox } from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import ListFolder from '../../components/listFolder'
+import ViewFolder from '../../components/viewFolder'
 import Modal from "react-native-modal";
 import VerifyModal from '../../components/modal/verify.js'
 import Verify from '../../elements/verify'
@@ -18,43 +18,17 @@ import { createId } from '../../services/data';
 // create a component
 @inject("profile", "schedule","auth")
 @observer
-export default class ProfileScreen extends Component {
+export default class ViewScheduleScreen extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            curTime: new Date(),
+            dateKey: toDateKey(new Date())
+        }
+    }
     
    
-    state = {
-        isModalVisible: false,
-        confirm: false,
-    };
-
-    _onCheckIn=(status)=>{
-        this.setState({ isModalVisible: !this.state.isModalVisible });
-        const {selectedItem} = this.props.profile
-        const { campus, term,account } = this.props.auth;
-        const dateKey=toDateKey(new Date());
-        const checkIn={
-            user:account,
-            checkDate:new Date(),
-            checkDateKey:dateKey,
-            status:status,
-            campus:campus,
-            term:term,
-            schedule:selectedItem,
-            note:null,
-            key:dateKey+'_'+selectedItem.key,
-            id:createId()
-        }
-        this.props.schedule.checkIn(checkIn,req=>{
-            if(req){
-                alert("Check in done!");
-                this.props.navigation.navigate("HomeStack");
-            }
-        })
-
-
-    }
-
-    _toggleModal = () =>
-        this.setState({ isModalVisible: !this.state.isModalVisible });
     
     render() {
     const {selectedItem} = this.props.profile
@@ -72,19 +46,11 @@ export default class ProfileScreen extends Component {
                 </SafeAreaView>
                 <SafeAreaView >
 
-                    <View style={{ flex: 1 }}>
-
-                        <Modal isVisible={this.state.isModalVisible} style={styles.bottomModal}>
-
-                        <VerifyModal onClick={this._onCheckIn} close={this._toggleModal}/>
-
-                        </Modal>
-
-                    </View>
+               
 
                     <ScrollView>
 
-                        <ListFolder 
+                        <ViewFolder 
                         teacher={selectedItem.instructor.full_name  }
                         phone={selectedItem.instructor.mobile_phone}
                         email={selectedItem.instructor.email}
@@ -92,15 +58,11 @@ export default class ProfileScreen extends Component {
                         time={ [selectedItem.session.fromHours," to ", selectedItem.session.toHours ]}
                         major={selectedItem.curriculum.major.name}
                         subject={selectedItem.schedule_subject.subject.name}
-                        />
-                        <TouchableOpacity onPress={this._toggleModal} >
-                            <View style={styles.button} backgroundColor='orange' >
-                                <View style={{ margin: 15 }}>
-                                    <Text style={{ fontSize: 14, fontWeight: '600', color: '#fff' }}>Verification</Text>
+                        status={selectedItem[this.state.dateKey]?selectedItem[this.state.dateKey].status.text:'Not check' }
 
-                                </View>
-                            </View>
-                        </TouchableOpacity>
+                        />
+                       
+                           
 
                     </ScrollView>
 

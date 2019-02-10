@@ -7,6 +7,7 @@ import store from './app/store'
 import SearchScreen from './app/screen/search'
 import ProfileScreen from './app/screen/profile'
 import ListFolder from './app/components/listFolder'
+// import SettingScreen from './app/screen/setting'
 
 
 export default class App extends Component{
@@ -18,6 +19,7 @@ export default class App extends Component{
     // <SafeAreaView>
     // <ListFolder/>
     // </SafeAreaView>
+    // <SettingScreen/>
     );
   }
 }

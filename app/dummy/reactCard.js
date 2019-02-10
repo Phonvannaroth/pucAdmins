@@ -32,4 +32,20 @@ export const recentCard =[
         color: '#EDEFEE',
         status: false,
     },
+    {
+        key: 5,
+        letter: 'S',
+        building:'Second Building',
+        floor: 5,
+        color: '#CCCCFF',
+        status: true,
+    },
+    {
+        key: 5,
+        letter: 'H',
+        building:'Third Building',
+        floor: 15,
+        color: '#EDEFEE',
+        status: false,
+    },
 ]

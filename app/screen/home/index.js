@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
+import { View, ImageBackground, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
 
 import COLORS from '../../style/color'
 import style from '../../style'
@@ -9,84 +9,154 @@ import RecentCard from '../../components/recent_card'
 import List from '../../components/list'
 import { recentCard } from '../../dummy/reactCard'
 import { listBuilding } from '../../dummy/listBuilding'
-import ListBuilding from '../../components/list'
-
+import ListSchedule from '../../components/listSchedule'
+import Clock from '../../components/clock'
+import moment from 'moment'
 
 import { inject, observer } from 'mobx-react';
+import { currentHourToNumber, hourSchedule, currentDay, toHourSchedule, toDateKey, toCalendar } from '../../services/mapping';
 
-@inject("auth","building")
+@inject("auth", "building", "schedule", "room", "floor", "profile")
 @observer
 export default class HomeScreen extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            curTime: new Date(),
+            dateKey: toDateKey(new Date())
+        }
+    }
     componentDidMount() {
-        this.props.auth.fetchBuilding();
+        const { campus, term } = this.props.auth;
+
+        this.props.building.fetchBuilding(campus.key);
+        this.props.schedule.fetchData(term.key, campus.key, hourSchedule(), currentDay())
+        setInterval(() => {
+            this.setState({
+                curTime: new Date()
+            })
+        }, 1000)
     }
 
     _onLogOut = () => {
         this.props.auth.logOut();
     }
+    _onRoom = (item) => {
+        this.props.profile.fetchSelectedRoom(item)
+        this.props.navigation.navigate("Profile")
+    }
+    renderItem = (item) => {
+        const checkIn = item[this.state.dateKey];
+        const checkMan = item[this.state.dateKey]?item[this.state.dateKey].user.displayName: null;
+        
+        if (checkIn) {
+            const { checkDate } = checkIn;
+            const dateMemo = toCalendar(checkDate);
+            return <ListSchedule
+                checkIn={dateMemo}
+                roomname={item.room.RoomName}
+                Time={item.session.fromHours}
+                fromTime={item.session.fromHours}
+                toTime={item.session.toHours}
+                teacher={item.instructor.full_name}
+                subject={item.schedule_subject.subject.name}
+                checker={checkMan}
+                status={item[this.state.dateKey].status.text }
+               
+            />
+        }
 
-    _onBuilding(item) {
-        this.props.building.fetchSelectedBuilding(item)
+        return (<ListSchedule
+            onClick={() => this._onRoom(item)}
+            roomname={item.room.RoomName}
+            Time={item.session.shift.duration}
+            fromTime={item.session.fromHours}
+            toTime={item.session.toHours}
+            teacher={item.instructor.first_name}
+            subject={item.schedule_subject.subject.name}
+            checker={checkMan}
+
+            
+
+        />)
+    }
+    
+    _onBuilding1 = (item) => {
+        this.props.floor.fetchSelectedBuildingofData(item)
         this.props.navigation.navigate("Floor")
     }
-    _onSearch= () => {
+
+    _onSearch = () => {
         this.props.navigation.navigate("SearchStack")
     }
 
     render() {
-        const numColumns = 2;
+        const numColumns = 50;
         const { displayName, campus } = this.props.auth.account;
-        const { building } = this.props.auth;
+        const { building } = this.props.building;
+        const { data } = this.props.schedule;
         return (
-
             <SafeAreaView style={[style.container, style.background]}>
                 <View style={style.homeheader}>
-                    <Header search={this._onSearch} name={displayName} campus={campus.name} drawer={() => this.props.navigation.openDrawer()} />
+                    <Header
+                        drawer={() => this.props.navigation.openDrawer()}
+                        name={displayName} campus={campus.name}
+                        onClick={() => this.props.navigation.navigate('SearchStack')}
+                        search={this._onSearch}
+                    />
                 </View>
-                {/* <Header logOut={this._onLogOut} name={displayName} campus={campus.name} onClick={() => this.props.navigation.navigate('SearchStack')}/> */}
 
-                <ScrollView showsVerticalScrollIndicator={false} style={style.mainbg} >
 
-                    <View style={style.main} >
 
-                        {/* <Header name="Steve.Job" campus="South Campus" /> */}
+                <View style={style.main} >
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={data}
+                        ListHeaderComponent={
+                            <View>
+                                <Clock
+                                    day={moment(this.state.curTime).format('dddd')}
+                                    time={moment(this.state.curTime).format('hh:mm')}
+                                    date={moment(this.state.curTime).format('LL')}
+                                    color={moment(this.state.curTime).format('dddd')}
+                                    color='Monday'
+                                    
+                                />
+                                <View style={{ marginBottom: 15, marginTop: 15, flexDirection: 'row', alignItems: 'center' }}>
+                                    {/* <Text style={style.h}>Recent Building</Text> */}
+                                    <Text style={{ marginLeft: 15, fontWeight: '700', fontSize: 22, flex: 1 }}>Building</Text>
+                                    <Text style={{ marginRight: 15, fontWeight: '400', fontSize: 14, color: '#2b2b2b' }}>more</Text>
+                                </View>
 
-                        <View style={{ marginBottom: 15, marginTop: 10 }}>
-                            {/* <Text style={style.h}>Recent Building</Text> */}
-                            <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>Recent Building</Text>
-                        </View>
-                        <View style={{ flex: 1, }} >
+                                <View style={{
+                                    borderBottomColor: "#f7f9fa",
+                                    borderBottomWidth: 10,
+                                }}>
+                                    <FlatList
+                                        data={data}
+                                        horizontal={true}
+                                        showsHorizontalScrollIndicator={false}
+                                        keyboardShouldPersistTaps="always"
+                                        renderItem={({ item, index }) => <RecentCard colorsindex={index}
+                                            onClick={() => this._onBuilding1(item)}
+                                            text={item.room.BuildingName} />}
+                                    />
+                                    <View style={{
+                                        marginTop: 15, borderBottomColor: "#f7f9fa",
+                                        borderBottomWidth: 10,
+                                    }}>
 
-                            <FlatList
-                                data={recentCard}
-                                renderItem={({ item }) => <RecentCard onClick={this._onBuilding} data={item} />}
-                                numColumns={numColumns}
-                            />
-                        </View>
+                                        <Text style={{ marginBottom: 15, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>Schedule</Text>
 
-                        
-                        <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-                            <View style={{ flex: 1, marginTop: 10 }} >
-                            {/* <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>List Building</Text> */}
+                                    </View>
+                                </View>
+
                             </View>
+                        }
+                        renderItem={({ item }) => this.renderItem(item)}
+                    />
+                </View>
 
-
-                        </View>
-{/* 
-                        {
-                            building.map(m => {
-                                return (<ListBuilding onClick={this._onBuilding(item)} key={m.key} name={m.name} />)
-                            })
-                        } */}
-                        <FlatList
-                         data={building}
-                         renderItem={({ item }) => ( <ListBuilding onClick={()=>this._onBuilding(item)} name={item.name} />)}
-                        />
-
-
-                    </View>
-                </ScrollView>
             </SafeAreaView>
 
         );

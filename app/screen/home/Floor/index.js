@@ -8,82 +8,95 @@ import { listLecture } from '../../../dummy/listBuilding'
 import ListFloor from '../../../components/listFloor';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { FlatList } from 'react-native-gesture-handler';
-@inject("auth", "building")
+import { toDateKey,toCalendar, currentDay, hourSchedule } from '../../../services/mapping';
+@inject("auth", "building", "room", 'floor')
 @observer
 
 export default class FloorSc extends Component {
     constructor() {
         super()
+        this.state={
+            dateKey:toDateKey(new Date())
+        }
     }
     componentDidMount() {
-        this.props.building.fetchClassRoom();
+        const { term } = this.props.auth;
+        this.props.floor.fetchData(term.key, currentDay(),hourSchedule());
     }
     _onRoom = () => {
         this.props.navigation.navigate("Profile")
     }
-    _onSelectedFloor=(item)=>{
-        this.props.building.fetchRoomByFloor(item.floor);
+
+    _onSelectedFloor = (item) => {
+        this.props.floor.fetchRoomByFloor(item.key);
     }
+
+    _renderHeader = () => {
+        const { floor } = this.props.floor;
+        return (
+            <ScrollView horizontal="true" showsHorizontalScrollIndicator="false">
+                <View style={styles.recent}>
+                    {
+                        floor.map(m => {
+                            const { name, key } = m
+                            return (<ListFloor key={key} name={name} onClick={() => this._onSelectedFloor(m)} />)
+                        })
+                    }
+                </View>
+            </ScrollView>
+        )
+    }
+    
+    _renderItem = (item) => {
+        const checkIn = item[this.state.dateKey];
+        const checkMan = item[this.state.dateKey] ? item[this.state.dateKey].user.displayName : null;
+        const {instructor}=item;
+        const instructorName=instructor?instructor.full_name:'Unknown';
+        if (checkIn) {
+            const { checkDate } = checkIn;
+            const dateMemo = toCalendar(checkDate);
+            return <ListSchedule
+                checkIn={dateMemo}
+                roomname={item.room.RoomName}
+                Time={item.session.fromHours}
+                fromTime={item.session.fromHours}
+                toTime={item.session.toHours}
+                teacher={item.instructor.full_name}
+                subject={item.schedule_subject.subject.name}
+                checker={checkMan}
+                status={item[this.state.dateKey].status.text}
+            />
+        }
+        return (<ListSchedule
+            onClick={() => this._onRoom(item)}
+            roomname={item.room.RoomName}
+            Time={item.session.shift.duration}
+            fromTime={item.session.fromHours}
+            toTime={item.session.toHours}
+            teacher={instructorName}
+            subject={item.schedule_subject.subject.name}
+            checker={checkMan}
+        />)
+    }
+
 
     render() {
-        const { classroom,floors } = this.props.building;
+        const { data } = this.props.floor;
         return (
-            <View style={{ backgroundColor: '#f7f9f9', flex: 1 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginLeft: 15, fontWeight: '800', fontSize: 24, marginTop: 10, flex: 1 }}>Floors</Text>
-                    <Text style={{ marginRight: 15, fontWeight: '400', fontSize: 16, marginTop: 10, alignItems: 'center' }}>more
-       </Text>
-
-
-                </View>
-                <View style={{ marginBottom: 10, marginTop: 10, }}>
-                    <ScrollView horizontal="true" showsHorizontalScrollIndicator="false">
-                        <View style={styles.recent}>
-
-
-                            {
-                                      floors.map(m => {
-                                    return (<ListFloor key={m.key} name={m.floor.name} onClick={()=>this._onSelectedFloor(m)}/>)
-                                })
-                            }
-
-                        </View>
-
-                    </ScrollView>
-                </View>
-                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D3D3D3', height: 5, marginHorizontal: 15, marginBottom: 10 }}>
-
-                </View>
-
-                {/* <ScrollView >
-    
-       <Text style={{marginLeft:15, fontWeight:'800', fontSize:24}}>Class List</Text>
-      
-      
-       {
-         roomData.map(m=>{
-           return (<Matfloor onClick={this._onRoom}  data={m} />)
-         })
-       }
-     
-    
-     </ScrollView> */}
-                <FlatList
-                    data={classroom}
-                    renderItem={({ item }) => (<Matfloor name={item.RoomName} />)}
-                />
-                <View style={{ flex: 1 }}>
-
-                </View>
-            </View>
-
-        );
+            <FlatList
+                data={data}
+                showsHorizontalScrollIndicator={false}
+                keyboardShouldPersistTaps="always"
+                renderItem={({ item }) => this._renderItem(item)}
+                ListHeaderComponent={this._renderHeader()}
+            />
+        )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     search: {
         backgroundColor: '#fff',

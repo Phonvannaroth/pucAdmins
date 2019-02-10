@@ -33,7 +33,7 @@ export default class DrawerScreen extends Component {
     }
 
     render() {
-        const { displayName, campus, email } = this.props.auth.account;
+        const { displayName, campus, email} = this.props.auth.account;
         const { data } = this.props.institutes;
         return (
             <View style={styles.container}>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 175,
-        backgroundColor: '#CC61C8',
+        backgroundColor: 'orange',
 
     },
     imgs: {

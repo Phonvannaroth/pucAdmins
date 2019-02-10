@@ -52,7 +52,8 @@ export default StyleSheet.create({
         borderBottomColor:'#d5d5d5'
     },
     main: {
-        marginHorizontal: 10,
+        marginHorizontal: 0,
+        flex:1
 
 
     },

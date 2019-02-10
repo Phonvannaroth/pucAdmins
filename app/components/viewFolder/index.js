@@ -8,9 +8,9 @@ import TR from '../../elements/tr'
 
 
 // create a component
-export default class ListFolder extends Component {
+export default class ViewFolder extends Component {
     render() {
-        const { teacher, phone, room, email, time, major, subject } = this.props
+        const { teacher, phone, room, email, time, major, subject, status } = this.props
         return (
 
             <View>
@@ -18,12 +18,12 @@ export default class ListFolder extends Component {
                 <TR Ionicons='ios-person' Txt={teacher} />
                 <TR Ionicons='ios-call' Txt={phone} />
                 <TR Ionicons='ios-mail' Txt={email} />
+                <TR Ionicons='ios-stats' Txt={status} />
                 <TH Txt='Class Information' />
                 <TR Ionicons='ios-easel' Txt={room} />
                 <TR Ionicons='ios-alarm' Txt={time} />
                 <TR Ionicons='ios-school' Txt={major} />
-                <TR Ionicons='ios-bookmarks' Txt={subject} />
-
+                <TR Ionicons='ios-bookmarks' Txt={subject} />        
                 <TR Ionicons='ios-people' Txt='25 Students' />
 
             </View>

@@ -13,7 +13,7 @@ export default class ListBuilding extends Component {
       {/* <View style={styles.c1}>
       <View style={styles.c2}> */}
       {/* <Icon style={{color:'#fff'}} name="ios-business" size={24}></Icon> */}
-      <ImageBackground source={require('../../img/b.png')} style={{width:50,height:50, overflow:'hidden'}}></ImageBackground>
+      {/* <ImageBackground source={require('../../img/b.png')} style={{width:50,height:50, overflow:'hidden'}}></ImageBackground> */}
       {/* </View>
       </View> */}
       <View style={styles.item}>   
