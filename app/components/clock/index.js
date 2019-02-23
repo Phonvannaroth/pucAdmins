@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     },
     day: {
         color: '#fff',
-        fontWeight: '900',
+        fontWeight: '700',
         fontSize: 24
     },
     date: {

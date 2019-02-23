@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, ImageBackground, Text, StyleSheet, SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
-
+import HeaderTxt from '../../components/headerTxt'
 import COLORS from '../../style/color'
 import style from '../../style'
 import Header from '../../components/header'
@@ -16,7 +16,8 @@ import moment from 'moment'
 import { inject, observer } from 'mobx-react';
 import { currentHourToNumber, hourSchedule, currentDay, toHourSchedule, toDateKey, toCalendar } from '../../services/mapping';
 
-@inject("auth", "building", "schedule", "room", 'floor', "profile")
+// @inject("auth", "building", "schedule", "room", 'floor', "profile")
+@inject("auth",  "listschedule", "room", 'floor', "profile")
 @observer
 export default class SettingScreen extends Component {
     constructor(props) {
@@ -28,8 +29,8 @@ export default class SettingScreen extends Component {
     }
     componentDidMount() {
         const { campus, term } = this.props.auth;
-        this.props.building.fetchBuilding(campus.key);
-        this.props.schedule.fetchCheckedData(term.key, campus.key, hourSchedule(), currentDay())
+        // this.props.building.fetchBuilding(campus.key);
+        this.props.listschedule.fetchCheckedData(term.key, campus.key, hourSchedule(), currentDay())
         setInterval(() => {
             this.setState({
                 curTime: new Date()
@@ -59,7 +60,7 @@ export default class SettingScreen extends Component {
                 Time={item.session.fromHours}
                 fromTime={item.session.fromHours}
                 toTime={item.session.toHours}
-                teacher={item.instructor.first_name}
+                teacher={item.instructor.full_name}
                 subject={item.schedule_subject.subject.name}
                 checker={checkMan}
                 status={item[this.state.dateKey].status.text?item[this.state.dateKey].status.text: 'Not Check' }
@@ -73,7 +74,7 @@ export default class SettingScreen extends Component {
             Time={item.session.shift.duration}
             fromTime={item.session.fromHours}
             toTime={item.session.toHours}
-            teacher={item.instructor.first_name}
+            teacher={item.instructor.full_name}
             subject={item.schedule_subject.subject.name}
             checker={checkMan}
             status='Not Check'
@@ -82,10 +83,10 @@ export default class SettingScreen extends Component {
 
         />)
     }
-    _onBuilding1 = (item) => {
-        this.props.floor.fetchSelectedBuildingofData(item)
-        this.props.navigation.navigate("Floor")
-    }
+    // _onBuilding1 = (item) => {
+    //     this.props.floor.fetchSelectedBuildingofData(item)
+    //     this.props.navigation.navigate("Floor")
+    // }
 
     _onSearch = () => {
         this.props.navigation.navigate("SearchStack")
@@ -95,8 +96,8 @@ export default class SettingScreen extends Component {
         const numColumns = 50;
 
         const { displayName, campus } = this.props.auth.account;
-        const { building } = this.props.building;
-        const { checkedData } = this.props.schedule;
+        // const { building } = this.props.building;
+        const { checkedData } = this.props.listschedule;
         console.log(checkedData)
         return (
             <SafeAreaView style={[style.container, style.background]}>
@@ -119,20 +120,7 @@ export default class SettingScreen extends Component {
                             <View>
                                
 
-                                <View style={{
-                                    borderBottomColor: "#f7f9fa",
-                                    borderBottomWidth: 5,
-                                }}>
-                        
-                                    <View style={{
-                                        marginTop: 15, borderBottomColor: "#f7f9fa",
-                                        borderBottomWidth: 5,
-                                    }}>
-
-                                        <Text style={{ marginBottom: 10, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>List Today Schedule</Text>
-
-                                    </View>
-                                </View>
+                               <HeaderTxt mainTxt="Today Schedules" />
 
                             </View>
                         }

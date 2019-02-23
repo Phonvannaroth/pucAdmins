@@ -11,9 +11,11 @@ export default RecentCard = ({ text,onClick,colorsindex }) => {
         <TouchableOpacity onPress={onClick} >
             <View style={[styles.card, {backgroundColor:colors[colorsindex].color}]}
                 >
-                <ImageBackground source={require('../../img/build.png')} style={{flex:1}}>
+                 {/* <View style={[styles.card, {backgroundColor:'#fff'}]}
+                > */}
+                <ImageBackground source={require('../../img/cart1.png')} style={{flex:1, borderRadius:5}}>
                 <View style={styles.text}>
-                    <Text style={{color:'#fff', fontWeight:'600'}}>{text}</Text>
+                    <Text style={{color:'#fff', fontWeight:'600', fontSize: 14}}>{text}</Text>
                 </View>
                 </ImageBackground>
               
@@ -25,25 +27,26 @@ export default RecentCard = ({ text,onClick,colorsindex }) => {
 
 const styles = StyleSheet.create({
     text:{
-        padding:6
+        padding:11
     },
     card: {
-        marginLeft: 6.5,
-        width: 85,
-        height: 100,
+        marginLeft: 6.8,
+        width: 115,
+        height: 110,
         backgroundColor: '#fff',
-
-        borderRadius: 6,
-        // borderBottomColor: '#D3D3D3',
+        
+        borderRadius: 5,
+        // borderColor: '#D3D3D3',
         // borderBottomWidth: 0.5,
         // borderColor: '#D3D3D3',
-        // borderWidth: 0.1,
+        // borderWidth: 0.2,
+        
         // borderBottomWidth: 1,
         // shadowColor: '#F27676',
         // shadowColor: '#D3D3D3',
-        // shadowOffset: { width: 0, height: 2 },
-        // shadowOpacity: 0.8,
-        // shadowRadius: 2,
+        // shadowOffset: { width: 0, height: .1 },
+        // shadowOpacity: 0.1,
+        // shadowRadius: 5,
     },
 
 })

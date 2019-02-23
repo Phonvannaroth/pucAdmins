@@ -5,6 +5,7 @@ import { View, ImageBackground, Text, StyleSheet, SafeAreaView, ScrollView, Imag
 import COLORS from '../../style/color'
 import style from '../../style'
 import Header from '../../components/header'
+import HeaderTxt from '../../components/headerTxt'
 import RecentCard from '../../components/recent_card'
 import List from '../../components/list'
 import { recentCard } from '../../dummy/reactCard'
@@ -25,34 +26,34 @@ export default class HomeScreen extends Component {
             curTime: new Date(),
             dateKey: toDateKey(new Date())
         }
-    }
-    componentDidMount() {
-        const { campus, term } = this.props.auth;
-
-        this.props.building.fetchBuilding(campus.key);
-        this.props.schedule.fetchData(term.key, campus.key, hourSchedule(), currentDay())
         setInterval(() => {
             this.setState({
                 curTime: new Date()
             })
         }, 1000)
     }
-
-    _onLogOut = () => {
-        this.props.auth.logOut();
+    componentDidMount() {
+        const { campus, term } = this.props.auth;
+        this.props.building.fetchBuilding(campus.key);
+        this.props.schedule.fetchData(term.key, campus.key, hourSchedule(), currentDay())
+        
     }
+
+  
     _onRoom = (item) => {
         this.props.profile.fetchSelectedRoom(item)
         this.props.navigation.navigate("Profile")
     }
     renderItem = (item) => {
-        const checkIn = item[this.state.dateKey];
-        const checkMan = item[this.state.dateKey]?item[this.state.dateKey].user.displayName: null;
         
+        const checkIn = item[this.state.dateKey];
+        const checkMan = item[this.state.dateKey] ? item[this.state.dateKey].user.displayName : null;
+
         if (checkIn) {
             const { checkDate } = checkIn;
             const dateMemo = toCalendar(checkDate);
             return <ListSchedule
+            
                 checkIn={dateMemo}
                 roomname={item.room.RoomName}
                 Time={item.session.fromHours}
@@ -61,8 +62,8 @@ export default class HomeScreen extends Component {
                 teacher={item.instructor.full_name}
                 subject={item.schedule_subject.subject.name}
                 checker={checkMan}
-                status={item[this.state.dateKey].status.text }
-               
+                status={item[this.state.dateKey].status.text}
+
             />
         }
 
@@ -72,15 +73,15 @@ export default class HomeScreen extends Component {
             Time={item.session.shift.duration}
             fromTime={item.session.fromHours}
             toTime={item.session.toHours}
-            teacher={item.instructor.first_name}
+            teacher={item.instructor.full_name}
             subject={item.schedule_subject.subject.name}
             checker={checkMan}
 
-            
+
 
         />)
     }
-    
+
     _onBuilding1 = (item) => {
         this.props.floor.fetchSelectedBuildingofData(item)
         this.props.navigation.navigate("Floor")
@@ -119,18 +120,12 @@ export default class HomeScreen extends Component {
                                     date={moment(this.state.curTime).format('LL')}
                                     color={moment(this.state.curTime).format('dddd')}
                                     color='Monday'
-                                    
-                                />
-                                <View style={{ marginBottom: 15, marginTop: 15, flexDirection: 'row', alignItems: 'center' }}>
-                                    {/* <Text style={style.h}>Recent Building</Text> */}
-                                    <Text style={{ marginLeft: 15, fontWeight: '700', fontSize: 22, flex: 1 }}>Building</Text>
-                                    <Text style={{ marginRight: 15, fontWeight: '400', fontSize: 14, color: '#2b2b2b' }}>more</Text>
-                                </View>
 
-                                <View style={{
-                                    borderBottomColor: "#f7f9fa",
-                                    borderBottomWidth: 10,
-                                }}>
+                                />
+
+                                <HeaderTxt mainTxt="Building" subTxt="More" />
+
+                                <View style={{  backgroundColor:'#fff',}}>
                                     <FlatList
                                         data={building}
                                         horizontal={true}
@@ -140,14 +135,8 @@ export default class HomeScreen extends Component {
                                             onClick={() => this._onBuilding1(item)}
                                             text={item.room.BuildingName} />}
                                     />
-                                    <View style={{
-                                        marginTop: 15, borderBottomColor: "#f7f9fa",
-                                        borderBottomWidth: 10,
-                                    }}>
 
-                                        <Text style={{ marginBottom: 15, marginLeft: 15, fontWeight: '700', fontSize: 22 }}>Schedule</Text>
-
-                                    </View>
+                                    <HeaderTxt mainTxt="Daily Schedules" />
                                 </View>
 
                             </View>

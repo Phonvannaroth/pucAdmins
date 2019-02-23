@@ -6,6 +6,7 @@ import { floorData } from './../../../dummy/floorData'
 import { inject, observer } from 'mobx-react';
 import { listLecture } from '../../../dummy/listBuilding'
 import ListFloor from '../../../components/listFloor';
+import HeaderTxt from '../../../components/headerTxt'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { FlatList } from 'react-native-gesture-handler';
 import { toDateKey,toCalendar, currentDay, hourSchedule } from '../../../services/mapping';
@@ -36,6 +37,9 @@ export default class FloorSc extends Component {
     _renderHeader = () => {
         const { floor } = this.props.floor;
         return (
+            <View>
+                 <HeaderTxt mainTxt="Floor" subTxt="More" />
+          
             <ScrollView horizontal="true" showsHorizontalScrollIndicator="false">
                 <View style={styles.recent}>
                     {
@@ -46,6 +50,8 @@ export default class FloorSc extends Component {
                     }
                 </View>
             </ScrollView>
+            <HeaderTxt mainTxt="Daily Schedule" />
+            </View>
         )
     }
     
@@ -53,7 +59,8 @@ export default class FloorSc extends Component {
         const checkIn = item[this.state.dateKey];
         const checkMan = item[this.state.dateKey] ? item[this.state.dateKey].user.displayName : null;
         const {instructor}=item;
-        const instructorName=instructor?instructor.first_name:'Unknown';
+        const instructorName=instructor?instructor.full_name:'Unknown';
+        console.log(item)
         if (checkIn) {
             const { checkDate } = checkIn;
             const dateMemo = toCalendar(checkDate);
@@ -86,6 +93,7 @@ export default class FloorSc extends Component {
         const { data } = this.props.floor;
         return (
             <FlatList
+            
                 data={data}
                 showsHorizontalScrollIndicator={false}
                 keyboardShouldPersistTaps="always"
@@ -98,7 +106,7 @@ export default class FloorSc extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
     },
     search: {
         backgroundColor: '#fff',

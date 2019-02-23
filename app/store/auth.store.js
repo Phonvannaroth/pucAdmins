@@ -69,10 +69,11 @@ export default class Auth{
         this.process=true;
         signOut().then(()=>{
             this.process=false;
-            callback(true,null)
+            // callback(true,null)
         }).catch(error=>{
             this.process=false;
-            callback(false,error)
+            // callback(false,error)
         })
     }
+   
 }

@@ -14,6 +14,6 @@ export function getClassByBuilding(termKey,buildingKey,day,time,callback){
     .onSnapshot(snanpshot=>{
         callback(pushToArray(snanpshot))
     },err => {
-        log.error('Listener failed', err);
+        
     })
 }

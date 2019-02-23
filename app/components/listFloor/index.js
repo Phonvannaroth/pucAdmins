@@ -21,23 +21,12 @@ export default ListFloor=({name,onClick,status})=> {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }} >
-                                    {/* <ImageBackground source={{uri:img}} style={{ */}
-                                    <ImageBackground source={require('../../img/stair.png')} style={{   
-                                        width: 30,
-                                        height: 30,
-                                        // backgroundColor: '#FADDDD',
-                                        borderRadius: 15,
-                                        backgroundColor: '#fff',
-                                        overflow: 'hidden',
-                                       
-                                        alignItems: 'center',
-                                    }}>
-                                    </ImageBackground>
-
+                                   
+                                    <Text style={styles.floor}>{name}</Text>
                                 </View>
 
                             </View>
-                            <Text style={styles.floor}>{name}</Text>
+                           
                            
                         </View>
 

@@ -13,7 +13,8 @@ import DrawerScreen from '../screen/drawer';
 import About from '../screen/about'
 import ProfileScreen from '../screen/profile'
 import ViewScheduleScreen from '../screen/viewSchedule'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/AntDesign'
+import BookingScreen from '../screen/booking'
 
 class LogoTitle extends React.Component {
   render() {
@@ -80,20 +81,36 @@ ViewSchedule: {
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeTab,
-  Setting: SettingTab,
+  
+  Schedule: SettingTab,
+
+  Booking:BookingScreen,
+
+  User:BookingScreen,
 
 },
 
   {
     defaultNavigationOptions: ({ navigation }) => ({
+      // tabBarIcon: ( 
+      // ) =>{
+      //   <Image style={{ width: 34, height: 34 }} 
+      //   source={require('../img/user.png')} />
+      // }
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         //   let iconName;
         if (routeName === 'Home') {
-          iconName ='ios-home';
+          iconName ='home';
         } 
-        else if (routeName === 'Setting') {
-          iconName = `ios-pulse`;
+        else if (routeName === 'Schedule') {
+          iconName = `calendar`;
+        }
+        else if (routeName === 'Booking') {
+          iconName = `book`;
+        }
+        else if (routeName === 'User') {
+          iconName = `user`;
         }
 
         // You can return any component that you like here! We usually use an
@@ -104,10 +121,14 @@ const TabNavigator = createBottomTabNavigator({
     tabBarComponent: TabNavigator,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: '#8166FE',
       inactiveTintColor: 'gray',
-      showLabel: false
+      showLabel: false,
+      
+      
+     
     },
+    
     animationEnabled: true,
     swipeEnabled: true,
 

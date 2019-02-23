@@ -3,156 +3,131 @@ import { Text, Image, ImageBackground, View, StyleSheet, TouchableOpacity } from
 import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 
-export default ViewSchedule = ({ roomname, checkIn, checker, Time, onClick, fromTime, toTime, teacher, subject,status }) => {
+export default ViewSchedule = ({ roomname, checkIn, checker, Time, onClick, fromTime, toTime, teacher, subject, status }) => {
     if (checkIn) return <View>
         <TouchableOpacity onPress={onClick}>
-        <View style={styles.list}>
-            <View style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', }}>
+            <View style={styles.list}>
+                <View style={styles.container} >
+                    <View style={styles.status} backgroundColor='red' >
+                        <ImageBackground source={require('../../img/card.png')} style={styles.imgback}>
+                            <View style={styles.left}>
+                                <Text style={styles.txtTime}>3H</Text>
+                                <Text >Start at</Text>
+                                <Text >{fromTime}</Text>
 
-                <ImageBackground source={require('../../img/schedule.png')} style={{ width: 45, height: 45, overflow: 'hidden' }}></ImageBackground>
-                <View style={{ margin: 10, height: 30, borderRadius: 5, justifyContent: 'center', flex: 1 }}>
-                    <Text style={{ fontSize: 24, fontWeight: '200' }}>Prof. {teacher}</Text>
-                </View>
-                <View style={{ backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', margin: 10, paddingLeft: 10, paddingRight: 10, height: 30, borderRadius: 5 }}>
-                    <Text style={{ color: '#fff' }}>{status}</Text>
+                            </View>
+                            <View style={styles.line}>
+
+                            </View>
+
+                            <View style={styles.right}>
+                                <Text style={styles.txtHeader}>{roomname}</Text>
+                                <Text >Prof. {teacher}</Text>
+                                <Text style={styles.txtSubject} >{subject}</Text>
+
+                            </View>
+                            {/* <Text style={styles.txtHeader}>{roomname}</Text>
+                     
+                     <Text style={styles.txtTime}>{fromTime}</Text>
+
+                     <Text style={styles.txtHeader}>{teacher}</Text> */}
+
+                        </ImageBackground>
+                    </View>
                 </View>
             </View>
-            <View style={styles.item}>
-                <View style={{ flexDirection: 'column', }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                        <Text style={{ color: 'red' }}></Text>
-                    </View>
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: -15 }}>
-                        <Text style={styles.text} >{fromTime} to {toTime}</Text>
-
-                    </View>
-                    <View style={{ marginBottom: 20, flexDirection: 'row', }}>
-                        <Icon name="ios-checkbox-outline" size={18} style={{ marginRight: 10 }}></Icon>
-                        <Text style={{ color: 'gray' }}>{roomname} by {checker}  </Text>
-                    </View>
-                    {/* <Text style={{ marginBottom: 20, fontWeight: '200' }}>{roomname}</Text> */}
-                    <Text style={{ fontSize: 16, fontWeight: '200' }}>( {subject} )</Text>
-                </View>
-
-
-
-            </View>
-        </View>
         </TouchableOpacity>
 
     </View>
 
     return (
         <TouchableOpacity onPress={onClick}>
-             <View style={styles.list}>
-            <View style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', }}>
+            <View style={styles.list}>
+                <View style={styles.container} >
+                    <View style={styles.status} backgroundColor="orange">
+                        <ImageBackground source={require('../../img/card.png')} style={styles.imgback}>
 
-                <ImageBackground source={require('../../img/schedule.png')} style={{ width: 45, height: 45, overflow: 'hidden' }}></ImageBackground>
-                <View style={{ margin: 10, height: 30, borderRadius: 5, justifyContent: 'center', flex: 1 }}>
-                    <Text style={{ fontSize: 24, fontWeight: '200' }}>Prof. {teacher}</Text>
-                </View>
-                <View style={{ backgroundColor: 'orange', justifyContent: 'center', alignItems: 'center', margin: 10, paddingLeft: 10, paddingRight: 10, height: 30, borderRadius: 5 }}>
-                    <Text style={{ color: '#fff' }}>Not Check</Text>
-                    
+                            <View style={styles.left}>
+                                <Text style={styles.txtTime}>3H</Text>
+                                <Text >Start at</Text>
+                                <Text  >{fromTime}</Text>
+
+                            </View>
+                            <View style={styles.line}>
+
+                            </View>
+
+                            <View style={styles.right}>
+                                <Text style={styles.txtHeader}>{roomname}</Text>
+                                <Text > Prof. {teacher}</Text>
+                                <Text style={styles.txtSubject} >{subject}</Text>
+
+                            </View>
+
+                        </ImageBackground>
+                    </View>
                 </View>
             </View>
-            <View style={styles.item}>
-                <View style={{ flexDirection: 'column', }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                        <Text style={{ color: 'red' }}></Text>
-                    </View>
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: -15 }}>
-                        <Text style={styles.text} >{fromTime} to {toTime}</Text>
-
-                    </View>
-                    <View style={{ marginBottom: 20, flexDirection: 'row', }}>
-                        
-                        <Text style={{ color: '#2b2b2b' }}>{roomname}</Text>
-                    </View>
-                    {/* <Text style={{ marginBottom: 20, fontWeight: '200' }}>{roomname}</Text> */}
-                    <Text style={{ fontSize: 16, fontWeight: '200' }}>( {subject} )</Text>
-                </View>
-
-
-
-            </View>
-        </View>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    profText: { fontSize: 24, fontWeight: '200' },
-    centerRow: { flexDirection: 'row', display: 'flex', alignItems: 'center', },
     list: {
-        height: 150,
-        display: 'flex',
-        // flexDirection: 'row',
-        paddingLeft: 12,
-        paddingRight: 12,
-        borderBottomColor: "#f7f9fa",
-        borderBottomWidth: 10,
-        // borderTopColor: "#f7f9fa",
-        // borderTopWidth: 5,
-
-    },
-    listVerify: {
-        height: 65,
-        display: 'flex',
+        margin: 5,
         justifyContent: 'center',
-        // flexDirection: 'row',
-        paddingLeft: 12,
-        paddingRight: 12,
-
-        borderBottomColor: "#f7f9fa",
-        borderBottomWidth: 10,
-        // borderTopColor: "#f7f9fa",
-        // borderTopWidth: 5,
-
+        alignItems: 'center'
     },
-    icon: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#CC61C8',
+    container: {
+        backgroundColor: '#EDEFEE',
+        // justifyContent: 'center', 
+        // alignItems: 'center' , 
+        width: 347.5, height: 129,
+        borderRadius: 5
     },
-    item: {
-        marginTop: 5,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    status: {
+        height: 129,
+        width: 5,
 
-
-
+        borderBottomLeftRadius: 15,
+        borderTopLeftRadius: 5
     },
-    text: {
-        fontSize: 16,
-
-
-        fontWeight: '700'
-
-    },
-    textVerify: {
+    txtHeader: {
         fontSize: 20,
-
-        fontWeight: '400'
-
+        fontWeight: '700',
+        color: '#2b2b2b',
+        flex: 1,
     },
-    c1: {
-        width: 56,
-        height: 56,
-        backgroundColor: '#CC61C8',
-        borderRadius: 28,
-        justifyContent: 'center',
-        alignItems: 'center',
+    txtTime: {
+        fontSize: 26,
+        fontWeight: '200',
+        color: '#2b2b2b',
+        flex: 1,
     },
-    c2: {
-        width: 52,
-        height: 52,
-        backgroundColor: '#fff',
-        borderRadius: 26,
-        justifyContent: 'center',
-        alignItems: 'center',
+    txtSubject: {
+        fontSize: 12,
+        fontWeight: '200',
+        color: '#2b2b2b',
+    },
+    imgback: {
+        width: 347.5,
+        height: 129,
+        overflow: 'hidden',
+        padding: 12,
+        flexDirection: 'row'
+    },
+    left: {
+        width: 80,
+        flexDirection: 'column'
+    },
+    line: {
+        width: 1,
+        backgroundColor: '#d3d3d3',
+        marginRight: 12
+    },
+    right: {
+        flexDirection: 'column',
+        padding: 10
     }
+
 })

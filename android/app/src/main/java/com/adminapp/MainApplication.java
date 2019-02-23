@@ -8,16 +8,26 @@ import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// import com.oblador.vectoricons.VectorIconsPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
+// import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
+// import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.oblador.vectoricons.VectorIconsPackage;
+// import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
-
+   
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
@@ -39,12 +49,22 @@ public class MainApplication extends Application implements ReactApplication {
             new LinearGradientPackage(),
             new RNGestureHandlerPackage(),
             new RNFirebasePackage(),
-            new RNFirebasePackage(),
-            new LinearGradientPackage(),
             new VectorIconsPackage(),
-            new RNGestureHandlerPackage(),
-            new VectorIconsPackage()
-            , new VectorIconsPackage()
+            new ReactMaterialKitPackage(),
+            new LinearGradientPackage(),
+            new RNFirebasePackage(),
+            new RNGestureHandlerPackage()
+            // new VectorIconsPackage(),
+            // new ReactMaterialKitPackage()
+            // new LinearGradientPackage()
+            // new RNGestureHandlerPackage(),
+            // new RNFirebasePackage(),
+            // new RNFirebasePackage(),
+            // new LinearGradientPackage(),
+            // new VectorIconsPackage(),
+            // new RNGestureHandlerPackage()
+            // new VectorIconsPackage()
+            // , new VectorIconsPackage()
       );
     }
 
