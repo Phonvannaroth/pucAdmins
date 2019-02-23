@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View,StyleSheet,TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 
 export default class ListDrawer extends Component {
@@ -23,15 +23,15 @@ export default class ListDrawer extends Component {
 }
 const styles = StyleSheet.create({
     list:{
-        height: 64,
+        height: 62,
         display: 'flex',
         flexDirection: 'row',
-        paddingLeft:12,
-        paddingRight: 12,
+        paddingLeft:18,
+        paddingRight: 18,
         alignItems:'center',
     },
     icon:{
-        fontSize:32,
+        fontSize:28,
        
     },
     item:{
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:16,
+        fontWeight: '300'
     },
     
 })

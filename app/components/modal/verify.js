@@ -24,20 +24,12 @@ export default  class VerifyModal extends Component {
 
                 </View>
 
-                <Verify onClick={()=>onClick({key:'presented',text:'Presented'})} Ionicons='ios-ribbon' Txt='Presented' Color='gray' Click={()=>alert("hello")} />
+                <Verify onClick={()=>onClick({key:'presented',text:'Presented'})} Ionicons='ios-ribbon' Txt='Presented' Color='gray' />
                 <Verify onClick={()=>onClick({key:'late',text:'Late'})} Ionicons='ios-time' Txt='Late' Color='#2b2b2b' />
                 <Verify onClick={()=>onClick({key:'too-late',text:'Too Late'})} Ionicons='ios-speedometer' Txt='Too late' Color='purple' />
                 <Verify onClick={()=>onClick({key:'permission',text:'Permission'})} Ionicons='ios-hand' Txt='Permission' Color='orange' />
                 <Verify onClick={()=>onClick({key:'absent',text:'Absent'})} Ionicons='ios-sad' Txt='Absent' Color='red' />
 
-                {/* <TouchableOpacity  onPress={this._toggleModal} >
-                    <View style={styles.btnSubmit} backgroundColor='#CC61C8' >
-                        <View style={{ margin: 15 }}>
-                            <Text style={{ fontSize: 14, fontWeight: '600', color: '#fff' }}>Cancle</Text>
-
-                        </View>
-                    </View>
-                </TouchableOpacity> */}
             </View>
 
         </View>

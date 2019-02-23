@@ -5,7 +5,7 @@ import { settings } from "../dummy/settings";
 import { setCheckIn } from "../services/room.services";
 import { groupBy, groupByDesc } from "../services/mapping";
 
-export default class Schedule{
+export default class ListSchedule{
     @observable data= [];
     @observable checkedData= [];
     @observable building= [];
@@ -19,11 +19,11 @@ export default class Schedule{
 
     @action
     fetchData(termKey,campusKey,time,day) {
-        console.log(termKey,campusKey,time,day)
+        
         this.loading=true;
         getSchedule(termKey,campusKey,time,day,snpashort => {
             this.building=groupBy(snpashort,"room.building.key","room.building.name")
-            console.log(this.building)
+           
             if(snpashort.length>=settings.Size){
                 this.lastVisible=snpashort[snpashort.length-1];
                 this.done=false;

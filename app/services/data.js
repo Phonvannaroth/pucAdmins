@@ -30,7 +30,6 @@ export function teachingAttendanceRef(){
 }
 
 export function classByBuildingRef(termKey,buildingKey,day,time){
-    console.log(day,time)
     return db.collection("academics_term").doc(termKey).collection("schedules")
     .where("room.building.key","==",buildingKey)
     .where("isBatch","==",true)
@@ -48,7 +47,7 @@ export function scheduleRef(termKey,campusKey,time,day){
     // .where("room.status")
     .where("session.days."+day,"==",true)
     .where("session.fromHoursNumber",">=",time)
-    .where("session.fromHoursNumber","<=",toHourSchedule())
+    // .where("session.fromHoursNumber","<=",toHourSchedule())
     .orderBy("session.fromHoursNumber")
     .limit(settings.Size)
 }

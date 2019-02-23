@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet,ImageBackground, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { floorData } from '../../dummy/floorData'
@@ -34,7 +34,7 @@ class SearchScreen extends Component {
                     searchIcon={
                         <TouchableOpacity onPress={this._onBack}>
                             <Icon name="ios-arrow-back"
-                                style={styles.searchicon}/>
+                                style={styles.searchicon} />
                         </TouchableOpacity>
                     }
                     containerStyle={styles.search}
@@ -44,7 +44,7 @@ class SearchScreen extends Component {
                 />
                 <View style={styles.body}>
 
-                    <Text>Recent</Text>
+                    {/* <Text>Recent</Text>
                     <ScrollView horizontal="true" showsHorizontalScrollIndicator="false">
                         <View style={styles.recent}>
 
@@ -74,7 +74,16 @@ class SearchScreen extends Component {
 
                         </View>
 
-                    </ScrollView>
+                    </ScrollView> */}
+                    <View style={{ width: 375, height: 350, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
+                        <ImageBackground source={require('../../img/develop.png')} style={{ height: 150, width: 150 }}>
+
+                        </ImageBackground>
+
+                        <Text style={{ fontSize: 20, fontWeight: '600', color: '#333', marginTop: 10 }}>Developing</Text>
+
+
+                    </View>
 
                 </View>
 

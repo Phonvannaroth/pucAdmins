@@ -32,9 +32,10 @@ export default class ViewScheduleScreen extends Component {
     
     render() {
     const {selectedItem} = this.props.profile
+    const bag = selectedItem[this.state.dateKey]?'#F27676':'#ffbe0b'
         return (
             <View style={{ flex: 1 }}>
-                <SafeAreaView style={{ height: 180, backgroundColor: 'orange' }}>
+                <SafeAreaView style={{ height: 180,}} backgroundColor={bag}>
                     <View style={{ marginHorizontal: 15, }}>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ flexDirection: 'row', alignItems: 'center', padding: 5 }}>
                             <Icon size={32} name='ios-arrow-back' color='#fff' ></Icon>

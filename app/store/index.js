@@ -5,6 +5,7 @@ import Schedule from "./schedule.store";
 import Room from "./room.store";
 import Floor from "./floor.store";
 import Profile from "./profile.store";
+import ListSchedule from "./listSchedule.store";
 
 export default APP_STORE={
     building : new Building(),
@@ -14,4 +15,5 @@ export default APP_STORE={
     room:new Room(),
     floor:new Floor(),
     profile: new Profile(),
+    listschedule: new ListSchedule(),
 }
