@@ -59,7 +59,7 @@ export default ViewSchedule = ({ roomname, checkIn, checker, Time, onClick, from
 
                             <View style={styles.right}>
                                 <Text style={styles.txtHeader}>{roomname}</Text>
-                                <Text > Prof. {teacher}</Text>
+                                <Text>Prof. {teacher}</Text>
                                 <Text style={styles.txtSubject} >{subject}</Text>
 
                             </View>

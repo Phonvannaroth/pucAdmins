@@ -74,6 +74,8 @@ export default class LoginScreen extends Component {
                             baseColor="#2b2b2b"
                             value={email}
                             onChangeText={email => this.setState({ email })}
+                            keyboardType="email-address"
+                            autoCapitalize='none'
                         // placeholder="Email"
 
                         >
