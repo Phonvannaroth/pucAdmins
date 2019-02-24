@@ -43,55 +43,67 @@ export default class LoginScreen extends Component {
         const { email, password } = this.state;
         const { process } = this.props.auth;
         return (
-            
+
             <View style={{ flex: 1 }}>
-            <View style={{ alignItems: "center", backgroundColor: '#0070c9', }}>
+                <View style={{
+                    alignItems: "center",
+                    backgroundColor: '#0070c9',
+                    // shadowColor: "#CFCCDC",
+                    shadowColor: "#EDEFEE",
+                    shadowOffset: {
+                        width: 0,
+                        height: 10
+                    },
+                    shadowRadius: 10,
+                    shadowOpacity: 0.6,
+                    elevation: 10,
+                }}>
                     <Image style={styles.img} source={require('../../img/Logo.jpg')} />
-                  
+
 
                     <Text style={{ color: '#fff', fontSize: 20, fontWeight: '600', marginTop: 10, marginBottom: 20 }}>PUC Administrator</Text>
                 </View>
-            
-                
+
+
                 <KeyboardAvoidingView style={styles.fl} behavior="padding" enabled>
-                 
+
                     <View style={styles.div}>
-             
+
                         <TextField
                             label="Email"
                             baseColor="#2b2b2b"
                             value={email}
                             onChangeText={email => this.setState({ email })}
-                            // placeholder="Email"
-                         
+                        // placeholder="Email"
+
                         >
                         </TextField>
                         <TextField
-                           
+
                             label="Password"
                             baseColor="#2b2b2b"
                             value={password}
                             onChangeText={password => this.setState({ password })}
-                            
+
                             secureTextEntry={true}
                         />
                     </View>
                     <TouchableOpacity onPress={this._onLogin}>
                         <LinearGradient colors={['#0070c9', '#FFB51C', '#667db6',]} style={{ alignItems: 'center', marginTop: 22, borderRadius: 25, overflow: "hidden", height: 50, justifyContent: 'center', width: 300, }}>
-                        <LinearGradient colors={['#fff', '#fff', '#fff',]} style={{ alignItems: 'center', borderRadius: 29, overflow: "hidden", height: 48, justifyContent: 'center', width: 299, }}>
+                            <LinearGradient colors={['#fff', '#fff', '#fff',]} style={{ alignItems: 'center', borderRadius: 29, overflow: "hidden", height: 48, justifyContent: 'center', width: 299, }}>
 
-                            {
-                                process ?
-                                    <MaterialIndicator size={18} color='#0070c9' />
-                                    : <View>
-                                        <Text style={styles.text} > {process ? "" : "Log in"}</Text>
-                                    </View>
-                            }
+                                {
+                                    process ?
+                                        <MaterialIndicator size={18} color='#0070c9' />
+                                        : <View>
+                                            <Text style={styles.text} > {process ? "" : "Log in"}</Text>
+                                        </View>
+                                }
                             </LinearGradient>
                         </LinearGradient>
                     </TouchableOpacity>
                     <View style={{ marginTop: 150, flex: 2 }}>
-                      
+
                         <View style={{ alignItems: "center", justifyContent: "center" }}>
 
                             <Text style={{ marginTop: 2, color: "#2b2b2b", fontSize: 10, }}>All rights reserved.</Text>
@@ -99,9 +111,9 @@ export default class LoginScreen extends Component {
                         </View>
                     </View>
                 </KeyboardAvoidingView>
-            
+
             </View>
-            
+
         )
     }
 }

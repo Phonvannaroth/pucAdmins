@@ -4,11 +4,6 @@ import { getBuilding } from "../services/building";
 export default class Building {
     @observable building = [];
     @observable loading = false;
-    @observable classroom = [];
-    @observable floors = [];
-    @observable selectedFloor = null;
-    @observable datasource = [];
-
 
     @action
     fetchBuilding(campusKey) {

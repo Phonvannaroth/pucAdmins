@@ -86,7 +86,7 @@ const TabNavigator = createBottomTabNavigator({
 
   Booking:BookingScreen,
 
-  User:BookingScreen,
+  
 
 },
 
@@ -124,7 +124,10 @@ const TabNavigator = createBottomTabNavigator({
       activeTintColor: '#8166FE',
       inactiveTintColor: 'gray',
       showLabel: false,
+     style:{
+      paddingHorizontal: 65,
       
+     }
       
      
     },

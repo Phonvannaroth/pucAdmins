@@ -38,7 +38,6 @@ export default class BookingScreen extends Component {
         const { displayName, campus } = this.props.auth.account;
         const { building } = this.props.building;
         const { checkedData } = this.props.schedule;
-        console.log(checkedData)
         return (
             <View>
             <SafeAreaView style={[style.container, style.background]}>

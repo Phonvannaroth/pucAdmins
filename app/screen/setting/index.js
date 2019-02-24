@@ -49,7 +49,6 @@ export default class SettingScreen extends Component {
     renderItem = (item) => {
         const checkIn = item[this.state.dateKey];
         const checkMan = item[this.state.dateKey]?item[this.state.dateKey].user.displayName: null;
-        console.log(checkMan)
         if (checkIn) {
             const { checkDate } = checkIn;
             const dateMemo = toCalendar(checkDate);
@@ -98,7 +97,6 @@ export default class SettingScreen extends Component {
         const { displayName, campus } = this.props.auth.account;
         // const { building } = this.props.building;
         const { checkedData } = this.props.listschedule;
-        console.log(checkedData)
         return (
             <SafeAreaView style={[style.container, style.background]}>
                 <View style={style.homeheader}>

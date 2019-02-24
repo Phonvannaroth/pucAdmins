@@ -12,8 +12,6 @@ export default class Auth{
     @observable config=null;
     @observable term=null;
 
-    constructor(){}
-
     @action
     fetchAuthStateChange(callback) {
         this.process=true;
@@ -65,7 +63,7 @@ export default class Auth{
     }
 
     @action
-    logOut(callback){
+    logOut(){
         this.process=true;
         signOut().then(()=>{
             this.process=false;

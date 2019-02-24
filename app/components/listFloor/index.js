@@ -92,7 +92,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     floor: {
-        fontSize: 11,
+        fontSize: 12,
+        overflow: 'hidden',
+        maxWidth: 19.3,
+        maxHeight: 20,
+        fontWeight: '200',        
         color: '#2b2b2b',
     },
     status: {

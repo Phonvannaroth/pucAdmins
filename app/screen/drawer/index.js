@@ -15,7 +15,7 @@ import { inject, observer } from 'mobx-react';
 import { ScrollView } from 'react-native-gesture-handler';
 import ListDrawer from '../../components/listDrawer'
 
-@inject("auth", "institutes")
+@inject("auth", "institutes",'building','floor','listschedule','profile','schedule')
 @observer
 
 export default class DrawerScreen extends Component {
@@ -26,10 +26,18 @@ export default class DrawerScreen extends Component {
 
     _onLogOut = () => {
         this.props.auth.logOut();
+       
     }
+
 
     _onInstitutes = () => {
         // this.props.navigation.navigate("Floor")
+    }
+
+    _renderHeader=()=>{
+        return(
+            <ListDrawer onClick={this._onBuilding} name="Academic Program" icon='book' colors='gray' />
+        )
     }
 
     render() {
@@ -56,10 +64,11 @@ export default class DrawerScreen extends Component {
                 <ScrollView showsVerticalScrollIndicator={false} >
                     <View style={styles.bodersty}>
                         <View style={{ justifyContent: 'center' }}>
-                            <Text style={styles.dtext}>Academic Program</Text>
+                            <Text style={styles.dtext}>Programs</Text>
                         </View>
                         <FlatList
                             data={data}
+                            ListHeaderComponent={this._renderHeader}
                             renderItem={({ item }) => <ListDrawer onClick={this._onBuilding} name={item.name} icon='book' colors='gray' />}
 
                         />
