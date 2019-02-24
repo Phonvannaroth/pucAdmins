@@ -9,7 +9,6 @@ export default class ListSchedule{
     @observable data= [];
     @observable checkedData= [];
     @observable building= [];
-    @observable selectedItem = null;
     @observable loading=false;
     @observable refresh=false;
     @observable done=false;
@@ -39,7 +38,6 @@ export default class ListSchedule{
 
     @action
     fetchCheckedData(termKey,campusKey,time,day) {
-        console.log(termKey,campusKey,time,day)
         this.loading=true;
         getSchedule(termKey,campusKey,0,day,snpashort => {
             this.building=groupBy(snpashort,"room.building.key","room.building.name")

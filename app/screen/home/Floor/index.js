@@ -60,7 +60,6 @@ export default class FloorSc extends Component {
         const checkMan = item[this.state.dateKey] ? item[this.state.dateKey].user.displayName : null;
         const {instructor}=item;
         const instructorName=instructor?instructor.full_name:'Unknown';
-        console.log(item)
         if (checkIn) {
             const { checkDate } = checkIn;
             const dateMemo = toCalendar(checkDate);

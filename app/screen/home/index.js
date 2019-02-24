@@ -24,19 +24,25 @@ export default class HomeScreen extends Component {
         super(props);
         this.state = {
             curTime: new Date(),
-            dateKey: toDateKey(new Date())
-        }
-        setInterval(() => {
-            this.setState({
-                curTime: new Date()
-            })
-        }, 1000)
+            dateKey: toDateKey(new Date()),
+            time:null,
+        }  
     }
     componentDidMount() {
+        this.time = setInterval(() => {
+            this.setState({
+                curTime: new Date(),
+               
+            })
+            
+        }, 1000)
         const { campus, term } = this.props.auth;
         this.props.building.fetchBuilding(campus.key);
         this.props.schedule.fetchData(term.key, campus.key, hourSchedule(), currentDay())
         
+    }
+    componentWillUnmount(){
+        clearInterval(this.time);
     }
 
   
